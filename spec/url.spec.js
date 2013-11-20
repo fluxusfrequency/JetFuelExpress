@@ -1,5 +1,5 @@
 var request = require('request');
-var app = require('../app');
+var app = require('../server');
 
 describe("url route", function() {
   it("should respond with 200 to url index page request", function(done) {
