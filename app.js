@@ -90,21 +90,20 @@ var UrlModel = mongoose.model( 'Urls', UrlSchema);
 app.get('/', routes.index);
 
 
-
 // INDEX
 app.get( '/urls', function( request, response ) {
   UrlModel.find( function( err, docs ) {
     if ( err ) {
       response.json( err );
     } else {
-      response.render( 'urls/index', { urls: docs });
+      response.render( 'index', { urls: docs });
     }
   });
 });
 
 // NEW
 app.get('/urls/new', function( request, response ) {
-  response.render('urls/new');
+  response.render('new');
 });
 
 // CREATE
@@ -129,52 +128,43 @@ app.post( '/urls', function( request, response ) {
 app.param('title', function( request, response, next, title ) {
   UrlModel.find({title: title}, function( err, docs ) {
     request.url = docs[0];
-    console.log(request.user);
     next();
   });
 })
 
 // SHOW
 app.get( '/urls/:title', function( request, response ) {
-  response.render('urls/show', {url: request.url });
+  response.render('show', {url: request.url });
 });
 
 // EDIT
-app.get( 'urls/:title/edit', function( request, response ) {
-  response.render('urls/edit', {url: request.url });
+app.get( '/urls/:title/edit', function( request, response ) {
+  response.render('edit', {url: request.url });
 });
 
 // UPDATE
 app.put( '/urls/:title', function( request, response ) {
-  return UrlModel.find( request.params.title, function( err, url ) {
-    url.title = request.body.title;
-    url.shortenedUrl = request.body.shortenedUrl;
-    url.originalUrl = request.body.originalUrl;
-    url.createdDate = request.body.createdDate;
-    return url.save( function( err ) {
+  UrlModel.update(
+    { 'title': request.params.title },
+    function( err ) {
       if( err ) {
-        response.json( err );
+      response.json( err );
       } else {
         response.redirect('/urls');
       }
-    });
   });
 });
 
 // DELETE
 app.delete( '/urls/:title', function( request, response ) {
-  return UrlModel.find( request.params.title, function( err, url ) {
-    url.title = request.body.title;
-    url.shortenedUrl = request.body.shortenedUrl;
-    url.originalUrl = request.body.originalUrl;
-    url.createdDate = request.body.createdDate;
-    return Url.remove( function( err ) {
+  UrlModel.remove(
+    { 'title': request.params.title},
+      function( err ) {
       if( err ) {
         response.json( err );
       } else {
         response.redirect('/urls')
       }
-    });
   });
 });
 
@@ -184,3 +174,5 @@ app.delete( '/urls/:title', function( request, response ) {
 app.listen(app.get('port'), function(){
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.settings.env );
 });
+
+module.exports = app;
