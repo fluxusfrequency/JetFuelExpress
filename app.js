@@ -116,12 +116,10 @@ app.post( '/urls', function( request, response ) {
     createdDate: request.body.createdDate,
   });
 
+
   url.save( function( err, url ) {
-    if ( err ) {
-      response.json( err );
-    } else {
-      response.redirect('/urls/' + url.title);
-    }
+    if( err ) response.json( err );
+    response.redirect('/urls/' + url.title);
   });
 });
 
@@ -130,7 +128,7 @@ app.param('title', function( request, response, next, title ) {
     request.url = docs[0];
     next();
   });
-})
+});
 
 // SHOW
 app.get( '/urls/:title', function( request, response ) {
@@ -146,12 +144,11 @@ app.get( '/urls/:title/edit', function( request, response ) {
 app.put( '/urls/:title', function( request, response ) {
   UrlModel.update(
     { 'title': request.params.title },
-    function( err ) {
-      if( err ) {
-      response.json( err );
-      } else {
-        response.redirect('/urls');
-      }
+    { 'shortenedUrl': request.params.shortenedUrl },
+    { 'originalUrl': request.params.originalUrl },
+      function( err ) {
+      if( err ) response.json( err );
+      response.redirect('/urls');
   });
 });
 
@@ -160,11 +157,8 @@ app.delete( '/urls/:title', function( request, response ) {
   UrlModel.remove(
     { 'title': request.params.title},
       function( err ) {
-      if( err ) {
-        response.json( err );
-      } else {
-        response.redirect('/urls')
-      }
+      if( err ) response.json( err );
+      response.redirect('/urls');
   });
 });
 
