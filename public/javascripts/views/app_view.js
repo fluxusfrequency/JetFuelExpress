@@ -4,6 +4,7 @@ jetfuelexpress.AppView = Backbone.View.extend({
   
   initialize: function() {
     _.bindAll(this, 'render', 'showHeader');
+    _.bindAll(this, 'render', 'showFooter');
 
     this.render();
   },
@@ -12,7 +13,6 @@ jetfuelexpress.AppView = Backbone.View.extend({
     this.$main = $('#main');
     
     this.showHeader();
-    this.showHome();
     this.showFooter();
 
     return this;
@@ -30,8 +30,12 @@ jetfuelexpress.AppView = Backbone.View.extend({
 
   showHome: function() {
     var view = new jetfuelexpress.HomeView();
-    $('#main').html(view.render().el);
-    // this.showView(view);
+    this.showView(view);
+  },
+
+  showUrl: function() {
+    var view = new jetfuelexpress.UrlView();
+    this.showView(view);
   },
 
   showView: function(view) {

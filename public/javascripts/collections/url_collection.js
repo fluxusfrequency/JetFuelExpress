@@ -1,15 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-(function () {
-  jetfuelexpress.UrlCollection = Backbone.Collection.extend({
-    model: jetfuelexpress.UrlModel,
+jetfuelexpress.UrlCollection = Backbone.Collection.extend({
+  model: jetfuelexpress.UrlModel,
+  url: '/api/urls'
 
-    initialize: function() {
-      _.bindAll(this, 'urlCollection');
-    },
-
-    urlIndex: function() {
-    }
-
-  });
-})();
+});

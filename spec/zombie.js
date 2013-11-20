@@ -14,8 +14,8 @@ browser.visit("http://localhost:3000/", function() {
 
 
 browser.visit("http://localhost:3000/", function() {
-  browser.fill("#url_form", "www.google.com").
-  pressButton("Shorten URL", function() {
+  browser.fill("#url-form", "www.google.com").
+  pressButton("Shorten", function() {
     assert.ok(browser.success);
     assert.equal(browser.location.pathname, "/shorten");
   });
