@@ -1,6 +1,7 @@
-var jetfuelexpress = window.jetfuelexpress || {};
+var jetfuelexpress = jetfuelexpress || {};
 
 $(function () {
-  new jetfuelexpress.Router();
-  Backbone.history.start();
+  jetfuelexpress.appView = new jetfuelexpress.AppView();
+  jetfuelexpress.router = new jetfuelexpress.Router();
+  Backbone.history.start({pushState: true});
 });

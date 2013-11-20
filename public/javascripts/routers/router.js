@@ -1,15 +1,13 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-(function () {
-  jetfuelexpress.Router = Backbone.Router.extend({
+jetfuelexpress.Router = Backbone.Router.extend({
 
-    routes: {
-      "home": "home"
-    },
+  routes: {
+    "": "home"
+  },
 
-    home: function() {
-      jetfuelexpress.appView.showHome();
-    }
+  home: function() {
+    jetfuelexpress.appView.showHome();
+  }
 
-  });
-})();
+});
