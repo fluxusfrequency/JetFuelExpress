@@ -107,6 +107,7 @@ app.get( '/urls', function( request, response ) {
   });
 });
 
+
 // NEW
 app.get('/urls/new', function( request, response ) {
   response.render('new');
@@ -167,6 +168,82 @@ app.delete( '/urls/:title', function( request, response ) {
       response.redirect('/urls');
   });
 });
+
+
+
+
+// API Routes
+
+// INDEX
+
+app.get( '/api/urls', function( request, response ) {
+  return UrlModel.find( function( err, url ) {
+    if ( err ) {
+      response.json( err );
+    } else {
+      response.send( url );
+    }
+  });
+});
+
+// CREATE
+
+app.post( '/api/urls', function( request, response ) {
+  var url = new UrlModel({
+    title: request.body.title,
+    shortenedUrl: request.body.shortenedUrl,
+    originalUrl: request.body.originalUrl,
+    description: request.body.description,
+    createdDate: Date.now(),
+  });
+
+
+  url.save( function( err, url ) {
+    if( err ) response.json( err );
+    response.send( url );
+  });
+});
+
+// SHOW
+
+app.get( '/api/urls/:id', function( request, response ) {
+  return UrlModel.findById( request.params.id, function( err, doc ) {
+    if ( err ) {
+      response.json( err );
+    } else {
+      response.send( doc );
+    }
+  });
+});
+
+// UPDATE
+
+app.put( '/api/urls/:id', function( request, response ) {
+  return UrlModel.findById( request.params.id, function( err, doc ) {
+    doc.title = request.body.title;
+    doc.shortenedUrl = request.body.shortenedUrl;
+    doc.originalUrl = request.body.originalUrl;
+    doc.description = request.body.description;
+
+    return doc.save( function( err, url ) {
+      if( err ) response.json( err );
+      response.send( url );
+    });
+  });
+});
+
+// DELETE
+
+app.delete( '/api/urls/:id', function( request, response ) {
+  return UrlModel.findById( request.params.id, function( err, doc ) {
+
+    return doc.remove( function( err, url ) {
+      if( err ) response.json( err );
+      response.send( "Success!" );
+    });
+  });
+});
+
 
 
 

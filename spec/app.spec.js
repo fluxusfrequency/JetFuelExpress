@@ -14,7 +14,6 @@ describe("app", function() {
   it("should respond successfully with to an API request", function(done) {
     request("http://localhost:3000/api", function(error, response, body) {
       expect(response.statusCode).toBe(200);
-      console.log(response);
       expect(response.body).toContain("JetFuelExpress API is running!")
       expect(error).toBe(null);
       done();

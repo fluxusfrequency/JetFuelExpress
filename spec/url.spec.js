@@ -5,7 +5,7 @@ describe("url route", function() {
   it("should respond with 200 to url index page request", function(done) {
     request("http://localhost:3000/urls", function(error, response, body) {
       expect(response.statusCode).toBe(200);
-      expect(body).toContain('Welcome');
+      expect(response.body).toContain('Welcome');
       done();
     });
   });
