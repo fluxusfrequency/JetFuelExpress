@@ -5,15 +5,12 @@
 
 var express = require('express');
 var routes = require('./routes');
+var mongoose = require ( 'mongoose' );
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var application_root = __dirname;
-var path = require ( 'path' );
-var mongoose = require ( 'mongoose' );
-
-
 
 // Create server
 var app = express();
@@ -48,41 +45,32 @@ app.configure( function() {
 
   // Where to serve static content
   app.use( express.static( path.join( application_root, 'public') ) );
-
-
-
-  // Development only
-  if ('development' == app.get('env')) {
-    // Show all errors in development
-    app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  }
-});
-
-
-// Start Server
-app.listen(app.get('port'), function(){
-  console.log('Express server listening on port %d in %s mode', app.get('port'), app.settings.env );
 });
 
 
 
-// Routes
+// Development only
+if ('development' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress');
+}
 
-app.get('/', routes.index);
-app.get('/urls', function(request, response) {
-  response.send( 'Listing all the Urls' );
-});
 
 
-
-// Connect to database
-mongoose.connect('mongodb://localhost/jetfuel_database');
+// Test only
+if ('test' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress');
+}
 
 
 
 // Schemas
 
-var Url = new mongoose.Schema({
+var UrlSchema = new mongoose.Schema({
+  title: String,
   shortenedUrl: String,
   originalUrl: String,
   description: String,
@@ -93,78 +81,106 @@ var Url = new mongoose.Schema({
 
 // Models
 
-var UrlModel = mongoose.model( 'Url', Url);
+var UrlModel = mongoose.model( 'Urls', UrlSchema);
 
 
-// Get a list of all the urls - INDEX
+
+// Routes
+
+app.get('/', routes.index);
+
+
+
+// INDEX
 app.get( '/urls', function( request, response ) {
-  return UrlModel.find( function( err, urls ) {
-    if ( !err ) {
-      return response.send( urls );
+  UrlModel.find( function( err, docs ) {
+    if ( err ) {
+      response.json( err );
     } else {
-      return console.log( err );
+      response.render( 'urls/index', { urls: docs });
     }
   });
 });
 
-// Insert a new url - CREATE
+// NEW
+app.get('/urls/new', function( request, response ) {
+  response.render('urls/new');
+});
+
+// CREATE
 app.post( '/urls', function( request, response ) {
   var url = new UrlModel({
+    title: request.body.title,
     shortenedUrl: request.body.shortenedUrl,
     originalUrl: request.body.originalUrl,
     description: request.body.description,
     createdDate: request.body.createdDate,
   });
-  url.save( function( err ) {
-    if ( !err ) {
-      return console.log( 'created' );
-    } else {
-      return console.log( err );
-    }
-  });
-  return response.send( url );
-});
 
-// Get a single url by id - GET
-app.get( '/urls/:id', function( request, response ) {
-  return UrlModel.findById( request.params.id, function( err, url ) {
-    if( !err ) {
-      return response.send( url );
+  url.save( function( err, url ) {
+    if ( err ) {
+      response.json( err );
     } else {
-      return console.log( err );
+      response.redirect('/urls/' + url.title);
     }
   });
 });
 
-// Update a url - UPDATE
-app.put( '/urls/:id', function( request, response ) {
-  console.log( 'Updating url ' + request.body.shortenedUrl );
-  return UrlModel.findById( request.params.id, function( err, url ) {
+app.param('title', function( request, response, next, title ) {
+  UrlModel.find({title: title}, function( err, docs ) {
+    request.url = docs[0];
+    console.log(request.user);
+    next();
+  });
+})
+
+// SHOW
+app.get( '/urls/:title', function( request, response ) {
+  response.render('urls/show', {url: request.url });
+});
+
+// EDIT
+app.get( 'urls/:title/edit', function( request, response ) {
+  response.render('urls/edit', {url: request.url });
+});
+
+// UPDATE
+app.put( '/urls/:title', function( request, response ) {
+  return UrlModel.find( request.params.title, function( err, url ) {
     url.title = request.body.title;
-    url.author = request.body.author;
-    url.releaseDate = request.body.releaseDate;
-    url.keywords = request.body.keywords;
+    url.shortenedUrl = request.body.shortenedUrl;
+    url.originalUrl = request.body.originalUrl;
+    url.createdDate = request.body.createdDate;
     return url.save( function( err ) {
-      if( !err ) {
-        console.log( 'url updated' );
+      if( err ) {
+        response.json( err );
       } else {
-        console.log( err );
+        response.redirect('/urls');
       }
-      return response.send( url );
     });
   });
 });
 
-// Delete a url - DELETE
-app.delete( '/urls/:id', function( request, response ) {
-  console.log( 'Deleting url with id: ' + request.params.id );
-  return UrlModel.findById( request.params.id, function( err, url ) {
-    return url.remove( function( err ) {
-      if( !err ) {
-        console.log( 'url removed' );
+// DELETE
+app.delete( '/urls/:title', function( request, response ) {
+  return UrlModel.find( request.params.title, function( err, url ) {
+    url.title = request.body.title;
+    url.shortenedUrl = request.body.shortenedUrl;
+    url.originalUrl = request.body.originalUrl;
+    url.createdDate = request.body.createdDate;
+    return Url.remove( function( err ) {
+      if( err ) {
+        response.json( err );
       } else {
-        console.log( err );
+        response.redirect('/urls')
       }
     });
   });
+});
+
+
+
+// Start Server
+app.listen(app.get('port'), function(){
+  console.log('Express server listening on port %d in %s mode', app.get('port'), app.settings.env );
 });
