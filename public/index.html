@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>JetFuelExpress</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <section id="header"><h1>JetFuel Express</h1></section>
+      <section id="main"></section>
+      <section id="footer"></section>
+    </div>
+
+    <script type="text/x-handlebars-template" id="header-template">
+      <h1>Header</h1>
+    </script>
+
+    <script type="text/x-handlebars-template" id="footer-template">
+      <h1>Footer</h1>
+    </script>
+
+    <script type="text/x-handlebars-template" id="home-template">
+      <h1>Home</h1>
+    </script>
+
+    <!-- DEPENDENCIES -->
+    <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
+    <script src="javascripts/lib/handlebars.js"></script>
+    <script src="javascripts/lib/underscore-min.js"></script>
+    <script src="javascripts/lib/backbone-min.js"></script>
+    <script src="javascripts/lib/jquery.dateFormat-1.0.js"></script>
+    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <!-- APP -->
+    <script src="javascripts/app.js"></script>
+    <script src="javascripts/routers/router.js"></script>
+    <script src="javascripts/models/url_model.js"></script>
+    <script src="javascripts/collections/url_collection.js"></script>
+    <script src="javascripts/views/app_view.js"></script>
+    <script src="javascripts/views/content_view.js"></script>
+    <script src="javascripts/views/header_view.js"></script>
+    <script src="javascripts/views/footer_view.js"></script>
+
+  </body>
+</html>

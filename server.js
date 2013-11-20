@@ -45,6 +45,8 @@ app.configure( function() {
 
   // Where to serve static content
   app.use( express.static( path.join( application_root, 'public') ) );
+
+  app.use( "/", ( path.join( application_root, 'public') ) );
 });
 
 
@@ -87,9 +89,9 @@ var UrlModel = mongoose.model( 'Urls', UrlSchema);
 
 // Routes
 
-app.get('/', function(request, response) {
-  response.render('index', { title: "JetFuelExpress"})
-});
+// app.get('/', function(request, response) {
+//   response.render('index')
+// });
 
 app.get('/api', function(request, response) {
   response.send( 'JetFuelExpress API is running!')
@@ -207,12 +209,13 @@ app.post( '/api/urls', function( request, response ) {
 // SHOW
 
 app.get( '/api/urls/:id', function( request, response ) {
-  return UrlModel.findById( request.params.id, function( err, doc ) {
+  var found = UrlModel.findById( request.params.id, function( err, doc ) {
     if ( err ) {
       response.json( err );
     } else {
-      response.send( doc );
+      return response.send( doc );
     }
+    return found._id;
   });
 });
 
