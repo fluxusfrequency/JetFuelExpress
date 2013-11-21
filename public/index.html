@@ -10,7 +10,7 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css" media="screen">
 
-    <link rel="stylesheet" href="stylesheets/sub-theme-dark.css">
+    <link rel="stylesheet" href="stylesheets/sub-theme-tan.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if IE]>
@@ -21,8 +21,13 @@
   <body>
 
     <div class="container">
+
+
       <section id="header"><h1 id="title">JetFuel Express</h1></section>
+
+      <section id="shorten"></section>
       <section id="main"></section>
+
 
       <section id="urls">
         <article>
@@ -33,7 +38,10 @@
         </article>
       </section>
 
+
       <section id="footer"></section>
+
+
     </div>
 
 
@@ -79,6 +87,17 @@
       </footer>
     </script>
 
+    <script type="text/x-handlebars-template" id="shorten-template">
+      <section class="container">
+
+        <form id="addUrl" action="#">
+          <input id="originalUrl" type="text" placeholder="Paste your link" required />
+          <button class="btn btn-gold" id="submit-button">Shorten</button>
+        </form>
+
+      </section>
+    </script>
+
     <script type="text/x-handlebars-template" id="home-template">
       <header id="main-header">
         <section class="container">
@@ -87,11 +106,6 @@
           <h2>JetFuel Express is the fast and easy way to 
           manage your links.<br />
           Sign up today!</h2>
-
-          <form id="addUrl" action="#">
-            <input id="originalUrl" type="text" placeholder="Paste your link" required />
-            <button class="btn btn-gold" id="submit-button">Shorten</button>
-          </form>
 
         </section>
       </header>
@@ -149,7 +163,7 @@
     </script>
 
     <script type="text/x-handlebars-template" id="url-template">
-      <li class="span3">
+      <li class="span12">
         <div class="box">
           <!-- Edit your article content here -->
           <h3>Your Shortened Link</h3>
@@ -179,6 +193,7 @@
     <script src="javascripts/views/app_view.js"></script>
     <script src="javascripts/views/header_view.js"></script>
     <script src="javascripts/views/footer_view.js"></script>
+    <script src="javascripts/views/shorten_view.js"></script>
     <script src="javascripts/views/home_view.js"></script>
     <script src="javascripts/views/url_view.js"></script>
     <script src="javascripts/views/urls_view.js"></script>

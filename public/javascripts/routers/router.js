@@ -8,6 +8,7 @@ jetfuelexpress.Router = Backbone.Router.extend({
   },
 
   home: function() {
+    jetfuelexpress.appView.showShorten();
     jetfuelexpress.appView.showHome();
   },
 
