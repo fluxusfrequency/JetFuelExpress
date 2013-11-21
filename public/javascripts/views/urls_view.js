@@ -8,7 +8,7 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
     this.urlCollection.fetch({reset: true});
     this.render();
 
-    this.listenTo(this.urlCollection, 'add', this.renderUrl);
+    this.listenTo(this.urlCollection, 'add', this.render);
     this.listenTo(this.urlCollection, 'reset', this.render);
   },
 

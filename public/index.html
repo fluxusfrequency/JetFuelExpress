@@ -23,9 +23,8 @@
     <div class="container">
 
 
-      <section id="header"><h1 id="title">JetFuel Express</h1></section>
+      <header id="header"><h1 id="title">JetFuel Express</h1></header>
 
-      <section id="shorten"></section>
       <section id="main"></section>
 
 
@@ -47,8 +46,6 @@
 
 
     <script type="text/x-handlebars-template" id="header-template">
-      <header>
-
         <nav>
           <div class="container">
             <!-- Edit your brand name here -->
@@ -57,7 +54,22 @@
           </div>
         </nav>
 
-      </header>
+        <section class="container" id="header-section">
+
+          <form id="addUrl" action="#">
+            <input id="originalUrl" type="text" placeholder="Paste your link" required />
+            <button class="btn btn-gold" id="submit-button">Shorten</button>
+          </form>
+
+        </section>
+
+    </script>
+
+    <script type="text/x-handlebars-template" id="welcome-template">
+      <!-- Edit your introduction here -->
+      <h1>Making it easy to share the web</h1>
+      <h2>JetFuel Express is the fast and easy way to 
+      manage your links.</h2>
     </script>
 
     <script type="text/x-handlebars-template" id="footer-template">
@@ -88,28 +100,10 @@
     </script>
 
     <script type="text/x-handlebars-template" id="shorten-template">
-      <section class="container">
-
-        <form id="addUrl" action="#">
-          <input id="originalUrl" type="text" placeholder="Paste your link" required />
-          <button class="btn btn-gold" id="submit-button">Shorten</button>
-        </form>
-
-      </section>
+      
     </script>
 
     <script type="text/x-handlebars-template" id="home-template">
-      <header id="main-header">
-        <section class="container">
-          <!-- Edit your introduction here -->
-          <h1>Making it easy to share the web</h1>
-          <h2>JetFuel Express is the fast and easy way to 
-          manage your links.<br />
-          Sign up today!</h2>
-
-        </section>
-      </header>
-
       <article>
         <div class="container">
           <ul class="row-fluid">
@@ -167,10 +161,8 @@
         <div class="box">
           <!-- Edit your article content here -->
           <h3>Your Shortened Link</h3>
-          <p>{{ shortenedUrl }}</p>
-          <p>{{ title }}</p>
-          <p>{{ originalUrl }}</p>
-          <p>{{ description }}</p>
+          <p>Shortened link: {{ shortenedUrl }}</p>
+          <p>Original url: {{ originalUrl }}</p>
           <button class="btn btn-gold delete">Delete</button>
         </div>
       </li>
@@ -193,7 +185,7 @@
     <script src="javascripts/views/app_view.js"></script>
     <script src="javascripts/views/header_view.js"></script>
     <script src="javascripts/views/footer_view.js"></script>
-    <script src="javascripts/views/shorten_view.js"></script>
+    <script src="javascripts/views/welcome_view.js"></script>
     <script src="javascripts/views/home_view.js"></script>
     <script src="javascripts/views/url_view.js"></script>
     <script src="javascripts/views/urls_view.js"></script>

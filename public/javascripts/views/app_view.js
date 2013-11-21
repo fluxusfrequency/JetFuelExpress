@@ -28,14 +28,14 @@ jetfuelexpress.AppView = Backbone.View.extend({
     $('#footer').html(view.render().el);
   },
 
-  showShorten: function() {
-    var view = new jetfuelexpress.ShortenView();
-    $('#shorten').html(view.render().el);
-  },
-
   showHome: function() {
     var view = new jetfuelexpress.HomeView();
     this.showView(view);
+  },
+
+  showWelcome: function() {
+    var view = new jetfuelexpress.WelcomeView();
+    $('#header-section').prepend(view.render().el);
   },
 
   showUrls: function() {
