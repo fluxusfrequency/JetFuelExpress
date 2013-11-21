@@ -1,7 +1,15 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-(function () {
-  jetfuelexpress.UrlModel = Backbone.Model.extend({
-    url: '/my_urls',
-  });
-})();
+jetfuelexpress.UrlModel = Backbone.Model.extend({
+ defaults: {
+  title: 'New Link',
+  shortenedUrl: '',
+  originalUrl: 'www.google.com',
+  description: "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for."
+ },
+
+ parse: function(response) {
+  response.id = response._id;
+  return response;
+ }
+});

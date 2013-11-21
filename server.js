@@ -89,10 +89,6 @@ var UrlModel = mongoose.model( 'Urls', UrlSchema);
 
 // Routes
 
-// app.get('/', function(request, response) {
-//   response.render('index')
-// });
-
 app.get('/api', function(request, response) {
   response.send( 'JetFuelExpress API is running!')
 });

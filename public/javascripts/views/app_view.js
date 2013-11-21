@@ -33,8 +33,9 @@ jetfuelexpress.AppView = Backbone.View.extend({
     this.showView(view);
   },
 
-  showUrl: function() {
-    var view = new jetfuelexpress.UrlView();
+  showUrls: function() {
+    showView.remove()
+    var view = new jetfuelexpress.UrlsView();
     this.showView(view);
   },
 
