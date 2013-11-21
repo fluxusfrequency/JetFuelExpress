@@ -68,12 +68,6 @@
 
     </script>
 
-    <script type="text/x-handlebars-template" id="welcome-template">      
-      <h1>Making it easy to share the web</h1>
-      <h2>JetFuel Express is the fast and easy way to 
-      manage your links.</h2>
-    </script>
-
     <script type="text/x-handlebars-template" id="footer-template">
       <footer>
         <div class="container">
@@ -101,8 +95,10 @@
       </footer>
     </script>
 
-    <script type="text/x-handlebars-template" id="shorten-template">
-      
+    <script type="text/x-handlebars-template" id="welcome-template">      
+      <h1>Making it easy to share the web</h1>
+      <h2>JetFuel Express is the fast and easy way to 
+      manage your links.</h2>
     </script>
 
     <script type="text/x-handlebars-template" id="home-template">
@@ -163,8 +159,8 @@
         <div class="box">
           <!-- Edit your article content here -->
           <h3>Your Shortened Link</h3>
-          <p>Shortened link: {{ shortenedUrl }}</p>
-          <p>Original url: {{ originalUrl }}</p>
+          <p>ShortLink: <a href="/{{ shortenedUrl }}">localhost:3000/{{ shortenedUrl }}</a></p>
+          <p>Original url: <a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></p>
           <button class="btn btn-gold delete">Delete</button>
         </div>
       </li>
