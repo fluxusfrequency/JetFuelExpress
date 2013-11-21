@@ -12,6 +12,11 @@
     "less-middleware": "*",
     "path": "~0.4.9",
     "request": "2.27.0",
-    "mongoose": "~3.5.5"
+    "mongoose": "~3.5.5",
+    "grunt": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*"
+
   }
 }
