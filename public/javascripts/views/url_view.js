@@ -1,21 +1,32 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-jetfuelexpress.UrlView = Backbone.View.extend({
-  className: 'urlContainer',
-  template: Handlebars.compile($('#url-template').html() ),
+define([
+  'jquery',
+  'handlebars',
+  'underscore',
+  'backbone',
+  'text!templates/url.hbs'
+  ], function($, Handlebars, _, Backbone, urlTemplate){
 
-  events: {
-    'click .delete': 'deleteUrl'
-  },
 
-  deleteUrl: function() {
-    this.model.destroy();
-    this.remove();
-    return false;
-  },
+  jetfuelexpress.UrlView = Backbone.View.extend({
+    className: 'urlContainer',
+    template: Handlebars.compile(urlTemplate),
 
-  render: function () {
-    this.$el.html( this.template( this.model.toJSON() ) );
-    return this;
-  }
+    events: {
+      'click .delete': 'deleteUrl'
+    },
+
+    deleteUrl: function() {
+      this.model.destroy();
+      this.remove();
+      return false;
+    },
+
+    render: function () {
+      this.$el.html( this.template( this.model.toJSON() ) );
+      return this;
+    }
+  });
+  return jetfuelexpress.UrlView;
 });

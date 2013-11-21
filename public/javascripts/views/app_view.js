@@ -1,50 +1,67 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-jetfuelexpress.AppView = Backbone.View.extend({
-  
-  initialize: function() {
-    _.bindAll(this, 'render', 'showHeader');
-    _.bindAll(this, 'render', 'showFooter');
+define([
+  'jquery',
+  'handlebars',
+  'underscore',
+  'backbone',
+  'collections/url_collection',
+  'views/urls_view',
+  'views/url_view',
+  'views/header_view',
+  'views/footer_view',
+  'views/shorten_view',
+  ], function($, Handlebars, _, Backbone, UrlsView, UrlView, HeaderView, FooterView, ShortenView){
 
-    this.render();
-  },
-
-  render: function () {
-    this.$main = $('#main');
+  jetfuelexpress.AppView = Backbone.View.extend({
     
-    this.showHeader();
-    this.showFooter();
+    initialize: function() {
+      _.bindAll(this, 'render', 'showHeader');
+      _.bindAll(this, 'render', 'showFooter');
+      _.bindAll(this, 'render', 'showShorten');
 
-    return this;
-  },
+      this.render();
+    },
 
-  showHeader: function() {
-    var view = new jetfuelexpress.HeaderView();
-    $('#header').html(view.render().el);
-  },
+    render: function () {
+      this.$main = $('#main');
+      
+      this.showHeader();
+      this.showFooter();
+      this.showShorten();
 
-  showFooter: function() {
-    var view = new jetfuelexpress.FooterView();
-    $('#footer').html(view.render().el);
-  },
+      return this;
+    },
 
-  showShorten: function() {
-    var view = new jetfuelexpress.ShortenView();
-    $('#shorten').html(view.render().el);
-  },
+    showHeader: function() {
+      var view = new HeaderView();
+      $('#header').html(view.render().el);
+    },
 
-  showHome: function() {
-    var view = new jetfuelexpress.HomeView();
-    this.showView(view);
-  },
+    showFooter: function() {
+      var view = new FooterView();
+      $('#footer').html(view.render().el);
+    },
 
-  showUrls: function() {
-    this.$main.html('');
-    var view = new jetfuelexpress.UrlsView();
-    this.showView(view);
-  },
+    showShorten: function() {
+      var view = new ShortenView();
+      $('#shorten').html(view.render().el);
+    },
 
-  showView: function(view) {
-    this.$main.html(view.render().el);
-  }
+    showHome: function() {
+      var view = new HomeView();
+      this.showView(view);
+    },
+
+    showUrls: function() {
+      this.$main.html('');
+      var view = new UrlsView();
+      this.showView(view);
+    },
+
+    showView: function(view) {
+      this.$main.html(view.render().el);
+    }
+  });
+  return jetfuelexpress.AppView;
 });

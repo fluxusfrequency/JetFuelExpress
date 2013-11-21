@@ -32,6 +32,7 @@
       <section id="urls">
         <article>
           <div class="container">
+            <h1 class="text-align:middle">Your Shortened Links</h1>
             <ul class="row-fluid url-list">
             </ul>
           </div>
@@ -88,14 +89,14 @@
     </script>
 
     <script type="text/x-handlebars-template" id="shorten-template">
-      <section class="container">
-
-        <form id="addUrl" action="#">
-          <input id="originalUrl" type="text" placeholder="Paste your link" required />
-          <button class="btn btn-gold" id="submit-button">Shorten</button>
-        </form>
-
-      </section>
+      <div id="subtheme">
+        <div class="container">
+          <form id="addUrl" action="#">
+            <input id="originalUrl" type="text" placeholder="Paste your link" required />
+            <button class="btn btn-gold" id="submit-button">Shorten</button>
+          </form>
+        </div>
+      </div>
     </script>
 
     <script type="text/x-handlebars-template" id="home-template">
@@ -175,8 +176,10 @@
         </div>
       </li>
     </script>
+      
+    <script data-main="javascripts/main" src="javascripts/lib/require.js"></script>
 
-    <!-- DEPENDENCIES -->
+    <!-- DEPENDENCIES 
     <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
     <script src="javascripts/lib/json3.min.js"></script>
     <script src="javascripts/lib/handlebars.js"></script>
@@ -185,7 +188,7 @@
     <script src="javascripts/lib/jquery.dateFormat-1.0.js"></script>
     <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
 
-    <!-- APP -->
+    <!-- APP 
     <script src="javascripts/app.js"></script>
     <script src="javascripts/routers/router.js"></script>
     <script src="javascripts/models/url_model.js"></script>
@@ -196,7 +199,7 @@
     <script src="javascripts/views/shorten_view.js"></script>
     <script src="javascripts/views/home_view.js"></script>
     <script src="javascripts/views/url_view.js"></script>
-    <script src="javascripts/views/urls_view.js"></script>
+    <script src="javascripts/views/urls_view.js"></script>-->
 
   </body>
 </html>

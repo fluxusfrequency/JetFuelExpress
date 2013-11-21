@@ -1,19 +1,28 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-jetfuelexpress.HeaderView = Backbone.View.extend({
-  template: Handlebars.compile($('#header-template').html()),
+define([
+  'jquery',
+  'handlebars',
+  'underscore',
+  'backbone',
+  'text!templates/header.hbs'
+  ], function($, Handlebars, _, Backbone, headerTemplate){
 
-  events: {
-    'click .brand': "showHome"
-  },
+  jetfuelexpress.HeaderView = Backbone.View.extend({
+    template: Handlebars.compile(headerTemplate),
 
-  render: function () {
-    this.$el.html(this.template());
-    return this;
-  },
+    events: {
+      'click .brand': "showHome"
+    },
 
-  showHome: function() {
-    Backbone.history.navigate('', { trigger: true });
-  }
+    render: function () {
+      this.$el.html(this.template());
+      return this;
+    },
 
+    showHome: function() {
+      Backbone.history.navigate('', { trigger: true });
+    }
+  });
+  return jetfuelexpress.HeaderView;
 });

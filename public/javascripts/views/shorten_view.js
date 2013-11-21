@@ -1,37 +1,47 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-jetfuelexpress.ShortenView = Backbone.View.extend({
-  template: Handlebars.compile($('#shorten-template').html()),
+define([
+  'jquery',
+  'handlebars',
+  'underscore',
+  'backbone',
+  'text!templates/shorten.hbs'
+  ], function($, Handlebars, _, Backbone, shortenTemplate){
 
-  render: function () {
-    this.$el.html(this.template());
-    return this;
-  },
+  jetfuelexpress.ShortenView = Backbone.View.extend({
+    template: Handlebars.compile(shortenTemplate),
 
-  events: {
-    'click #submit-button': 'addUrl',
-  },
+    render: function () {
+      this.$el.html(this.template());
+      return this;
+    },
 
-  addUrl: function(e) {
-    e.preventDefault();
-    var formData = {};
+    events: {
+      'click #submit-button': 'addUrl',
+    },
 
-    var new_link = this.$('#originalUrl').val();
-    $.ajax({
-      url: '/api/urls',
-      type: 'POST',
-      dataType: 'json',
-      data: { url: { originalUrl: new_link } },
-      success: function(data) {
-        Backbone.history.navigate('shorten', {trigger: true});
-      },
-      error: function(response) {
-        var errors = response.responseJSON;
-        if(errors) {
-          $('#originalUrl').html(errors);
+    addUrl: function(e) {
+      e.preventDefault();
+      var formData = {};
+
+      var new_link = this.$('#originalUrl').val();
+      $.ajax({
+        url: '/api/urls',
+        type: 'POST',
+        dataType: 'json',
+        data: { url: { originalUrl: new_link } },
+        success: function(data) {
+          Backbone.history.navigate('shorten', {trigger: true});
+        },
+        error: function(response) {
+          var errors = response.responseJSON;
+          if(errors) {
+            $('#originalUrl').html(errors);
+          }
         }
-      }
-    });
-  }
+      });
+    }
 
+  });
+  return jetfuelexpress.ShortenView;
 });
