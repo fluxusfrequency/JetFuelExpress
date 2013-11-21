@@ -24,6 +24,12 @@
       <section id="header"><h1>JetFuel Express</h1></section>
       <section id="main"></section>
       <section id="urls">
+        <article>
+          <div class="container">
+            <ul class="row-fluid url-list">
+            </ul>
+          </div>
+        </article>
       </section>
       <section id="footer"></section>
     </div>
@@ -72,21 +78,21 @@
     </script>
 
     <script type="text/x-handlebars-template" id="home-template">
-    <header id="main-header">
-      <section class="container">
-        <!-- Edit your introduction here -->
-        <h1>Making it easy to share the web</h1>
-        <h2>JetFuel Express is the fast and easy way to 
-        manage your links.<br />
-        Sign up today!</h2>
+      <header id="main-header">
+        <section class="container">
+          <!-- Edit your introduction here -->
+          <h1>Making it easy to share the web</h1>
+          <h2>JetFuel Express is the fast and easy way to 
+          manage your links.<br />
+          Sign up today!</h2>
 
-        <form id="addUrl" action="#">
-          <input id="originalUrl" type="text" placeholder="Paste your link" required />
-          <button class="btn btn-gold" id="submit-button">Shorten</button>
-        </form>
+          <form id="addUrl" action="#">
+            <input id="originalUrl" type="text" placeholder="Paste your link" required />
+            <button class="btn btn-gold" id="submit-button">Shorten</button>
+          </form>
 
-      </section>
-    </header>
+        </section>
+      </header>
 
       <article>
         <div class="container">
@@ -141,21 +147,17 @@
     </script>
 
     <script type="text/x-handlebars-template" id="url-template">
-      <header id="main-header">
-        <section class="container">
-          <!-- Edit your introduction here -->
-          <h2>Here is your shortened link:</h2>
-            <ul>
-              <li><%# shortenedUrl %></li>
-              <li><%# originalUrl %></li>
-              <li><%# title %></li>
-              <li><%# description %></li>
-            </ul>
-
-            <button class="delete">Delete</button>
-          </script>
-        </section>
-      </header>
+      <li class="span3">
+        <div class="box">
+          <!-- Edit your article content here -->
+          <h3>Your Shortened Link</h3>
+          <p>{{ shortenedUrl }}</p>
+          <p>{{ title }}</p>
+          <p>{{ originalUrl }}</p>
+          <p>{{ description }}</p>
+          <button class="btn btn-gold delete">Delete</button>
+        </div>
+      </li>
     </script>
 
     <!-- DEPENDENCIES -->

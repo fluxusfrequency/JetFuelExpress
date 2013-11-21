@@ -1,7 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.UrlView = Backbone.View.extend({
-  tagName: 'li',
+  tagName: 'div',
   className: 'urlContainer',
   template: Handlebars.compile($('#url-template').html() ),
 
@@ -15,7 +15,7 @@ jetfuelexpress.UrlView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template(this.model.toJSON() ));
+    this.$el.html( this.template( this.model.toJSON() ) );
     return this;
   }
 });

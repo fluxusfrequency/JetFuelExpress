@@ -1,7 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.UrlsView = Backbone.View.extend({
-  el: '#urls',
+  el: '.url-list',
 
   initialize: function(initialUrls) {
     this.urlCollection = new jetfuelexpress.UrlCollection();
