@@ -39,6 +39,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
         }
       }
     });
+    $('#originalUrl').val('');
   }
 
 });

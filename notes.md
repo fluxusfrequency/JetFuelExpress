@@ -1,3 +1,15 @@
+#Jet Fuel
+
+get "/urls/:shortened/?" do
+   @url = Url.find_by_shortened(params[:shortened])
+   @short_link = "#{request.base_url}/#{@url.shortened}"
+   erb "urls/show".to_sym
+ end
+
+
+
+
+
 #Bit.ly
 
 - Root: Just ads and an input form, plus sign in and sign up links. Footer for nav.

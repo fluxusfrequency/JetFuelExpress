@@ -5,15 +5,14 @@
 
 var express = require('express');
 var mongoose = require ( 'mongoose' );
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var generator = require('./lib/generator');
 
 var application_root = __dirname;
 
 // Create server
 var app = express();
-
 
 
 
@@ -64,6 +63,21 @@ var UrlSchema = new mongoose.Schema({
 var UrlModel = mongoose.model( 'Urls', UrlSchema);
 
 
+// Development only
+if ('development' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress');
+}
+
+// Test only
+if ('test' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress');
+}
+
+
 
 
 //Routes
@@ -93,7 +107,7 @@ app.get( '/api/urls', function( request, response ) {
 app.post( '/api/urls', function( request, response ) {
   var url = new UrlModel({
     title: request.body.title,
-    shortenedUrl: request.body.shortenedUrl,
+    shortenedUrl: generator.generate_link(),
     originalUrl: request.body.originalUrl,
     description: request.body.description,
     createdDate: Date.now(),
@@ -108,8 +122,8 @@ app.post( '/api/urls', function( request, response ) {
 
 // SHOW
 
-app.get( '/api/urls/:id', function( request, response ) {
-  var found = UrlModel.findById( request.params.id, function( err, doc ) {
+app.get( '/api/urls/:shortened', function( request, response ) {
+  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
     if ( err ) {
       response.json( err );
     } else {
@@ -121,8 +135,8 @@ app.get( '/api/urls/:id', function( request, response ) {
 
 // UPDATE
 
-app.put( '/api/urls/:id', function( request, response ) {
-  return UrlModel.findById( request.params.id, function( err, doc ) {
+app.put( '/api/urls/:shortened', function( request, response ) {
+  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
     doc.title = request.body.title;
     doc.shortenedUrl = request.body.shortenedUrl;
     doc.originalUrl = request.body.originalUrl;
@@ -137,7 +151,7 @@ app.put( '/api/urls/:id', function( request, response ) {
 
 // DELETE
 
-app.delete( '/api/urls/:id', function( request, response ) {
+app.delete( '/api/urls/:shortened', function( request, response ) {
   return UrlModel.findById( request.params.id, function( err, doc ) {
 
     return doc.remove( function( err, url ) {
@@ -148,21 +162,6 @@ app.delete( '/api/urls/:id', function( request, response ) {
 });
 
 
-
-
-// Development only
-if ('development' == app.get('env')) {
-  // Show all errors in development
-  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  mongoose.connect('mongodb://localhost/jetfuelexpress');
-}
-
-// Test only
-if ('test' == app.get('env')) {
-  // Show all errors in development
-  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  mongoose.connect('mongodb://localhost/jetfuelexpress');
-}
 
 // Start Server
 app.listen(app.get('port'), function(){

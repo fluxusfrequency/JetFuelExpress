@@ -35,12 +35,12 @@ jetfuelexpress.AppView = Backbone.View.extend({
 
   showWelcome: function() {
     var view = new jetfuelexpress.WelcomeView();
-    $('#header-section').prepend(view.render().el);
+    $('#header-message').html(view.render().el);
   },
 
   showUrls: function() {
     this.$main.html('');
-    $('#header-section').children('div').html('<h2>Paste Another Link to Shorten</h2>');
+    $('#header-message').html('<h2>Paste Another Link to Shorten</h2>');
     var view = new jetfuelexpress.UrlsView();
     this.showView(view);
   },
