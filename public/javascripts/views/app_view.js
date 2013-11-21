@@ -40,6 +40,7 @@ jetfuelexpress.AppView = Backbone.View.extend({
 
   showUrls: function() {
     this.$main.html('');
+    $('#header-section').children('div').html('<h2>Paste Another Link to Shorten</h2>');
     var view = new jetfuelexpress.UrlsView();
     this.showView(view);
   },
