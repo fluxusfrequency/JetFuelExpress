@@ -40,6 +40,6 @@ jetfuelexpress.AppView = Backbone.View.extend({
 
   showView: function(view) {
     this.$main.html('');
-    this.$main.html(view.render().el);
+    this.$main.html(view.render());
   }
 });
