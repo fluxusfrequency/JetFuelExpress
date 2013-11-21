@@ -129,7 +129,18 @@ app.get( '/api/urls/:shortened', function( request, response ) {
     } else {
       return response.send( doc );
     }
-    return found._id;
+  });
+});
+
+// REDIRECT
+
+app.get( '/:shortened', function( request, response ) {
+  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
+    if ( err ) {
+      response.json( err );
+    } else {
+      return response.redirect("http://" + doc.originalUrl);
+    }
   });
 });
 
@@ -138,8 +149,6 @@ app.get( '/api/urls/:shortened', function( request, response ) {
 app.put( '/api/urls/:shortened', function( request, response ) {
   return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
     doc.title = request.body.title;
-    doc.shortenedUrl = request.body.shortenedUrl;
-    doc.originalUrl = request.body.originalUrl;
     doc.description = request.body.description;
 
     return doc.save( function( err, url ) {
