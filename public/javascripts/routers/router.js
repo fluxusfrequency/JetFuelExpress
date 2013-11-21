@@ -1,18 +1,28 @@
 var jetfuelexpress = jetfuelexpress || {};
 
-jetfuelexpress.Router = Backbone.Router.extend({
+define([
+  'jquery',
+  'handlebars',
+  'underscore',
+  'backbone',
+  'views/app_view',
+  ], function($, Handlebars, _, Backbone, AppView){
 
-  routes: {
-    "": "home",
-    "shorten": "urls"
-  },
+  jetfuelexpress.Router = Backbone.Router.extend({
 
-  home: function() {
-    jetfuelexpress.appView.showHome();
-  },
+    routes: {
+      "": "home",
+      "shorten": "urls"
+    },
 
-  urls: function() {
-    jetfuelexpress.appView.showUrls();
-  }
+    home: function() {
+      jetfuelexpress.appView.showHome();
+    },
 
+    urls: function() {
+      jetfuelexpress.appView.showUrls();
+    }
+
+  });
+  return jetfuelexpress.Router;
 });

@@ -10,6 +10,6 @@
 
  });
 
- require(['app'], function(jetfuelexpress.AppView){
-   var app_view = new jetfuelexpress.AppView;
+ require(['app'], function(AppView){
+   var jetfuelexpress.appView = new jetfuelexpress.AppView();
  });
