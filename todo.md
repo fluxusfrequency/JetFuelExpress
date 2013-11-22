@@ -11,9 +11,9 @@ X Fix server tests by using .last or createdDate
 
 
 - Split urls off into their own model
-  - Test them with Jasmine
-  - Needs original, slug, active, visits, createdDate, userID
-  - Remove unneeded attrs 
+  X Test them with Jasmine
+  X Needs original, slug, active, visits, createdDate, userID
+  X Remove unneeded attrs 
   - Give them validations for presence and length
   - regex for link to be a valid web address
   - Split them off into a file
