@@ -61,7 +61,7 @@ var UrlSchema = new mongoose.Schema({
 // Models
 
 var UrlModel = mongoose.model( 'Urls', UrlSchema);
-
+app["UrlModel"] = UrlModel;
 
 // Development only
 if ('development' == app.get('env')) {
@@ -74,7 +74,7 @@ if ('development' == app.get('env')) {
 if ('test' == app.get('env')) {
   // Show all errors in development
   app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  mongoose.connect('mongodb://localhost/jetfuelexpress');
+  mongoose.connect('mongodb://localhost/jetfuelexpress_test');
 }
 
 
@@ -106,13 +106,10 @@ app.get( '/api/urls', function( request, response ) {
 
 app.post( '/api/urls', function( request, response ) {
   var url = new UrlModel({
-    title: request.body.title,
-    shortenedUrl: generator.generate_link(),
+    shortenedUrl: generator.generate_slug(),
     originalUrl: request.body.originalUrl,
-    description: request.body.description,
-    createdDate: Date.now(),
+    createdDate: Date.now()
   });
-
 
   url.save( function( err, url ) {
     if( err ) response.json( err );
@@ -123,11 +120,11 @@ app.post( '/api/urls', function( request, response ) {
 // SHOW
 
 app.get( '/api/urls/:shortened', function( request, response ) {
-  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
+  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
-      return response.send( doc );
+      return response.send( url );
     }
   });
 });
@@ -135,11 +132,11 @@ app.get( '/api/urls/:shortened', function( request, response ) {
 // REDIRECT
 
 app.get( '/:shortened', function( request, response ) {
-  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
+  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
-      return response.redirect("http://" + doc.originalUrl);
+      return response.redirect("http://" + url.originalUrl);
     }
   });
 });
@@ -147,11 +144,12 @@ app.get( '/:shortened', function( request, response ) {
 // UPDATE
 
 app.put( '/api/urls/:shortened', function( request, response ) {
-  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, doc ) {
-    doc.title = request.body.title;
-    doc.description = request.body.description;
+  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
+    url.shortenedUrl = url.shortenedUrl;
+    url.originalUrl = request.body.originalUrl;
+    url.createdDate = url.createdDate;
 
-    return doc.save( function( err, url ) {
+    return url.save( function( err, url ) {
       if( err ) response.json( err );
       response.send( url );
     });
@@ -161,9 +159,9 @@ app.put( '/api/urls/:shortened', function( request, response ) {
 // DELETE
 
 app.delete( '/api/urls/:shortened', function( request, response ) {
-  return UrlModel.findById( request.params.id, function( err, doc ) {
+  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
 
-    return doc.remove( function( err, url ) {
+    return url.remove( function( err, url ) {
       if( err ) response.json( err );
       response.send( "Success!" );
     });
