@@ -97,7 +97,6 @@ describe("api route", function() {
     url.save();
     request.get( "http://localhost:3000/"  + url.slug, function(error, response, body) {
         expect(response.statusCode).toBe(200);
-        console.log(response);
         expect(response.body).toContain("Lycos is your source for all the Web has to offer");
         expect(error).toBeNull;
         done();
