@@ -155,15 +155,19 @@
     </script>
 
     <script type="text/x-handlebars-template" id="url-template">
-      <li class="span12">
-        <div class="box">
-          <!-- Edit your article content here -->
-          <h3>Your Shortened Link</h3>
-          <p>ShortLink: <a href="/{{ shortenedUrl }}">localhost:3000/{{ shortenedUrl }}</a></p>
-          <p>Original url: <a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></p>
-          <button class="btn btn-gold delete">Delete</button>
-        </div>
-      </li>
+      {{#if active }}
+        <li class="span12">
+          <div class="box">
+            <!-- Edit your article content here -->
+            <h3>Your Shortened Link</h3>
+            <p>ShortLink: <a href="/{{ slug }}">localhost:3000/{{ slug }}</a></p>
+            <p>Original url: <a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></p>
+            <p>Views: {{ visits }}</p>
+            <p>Date Created: {{ createdDate }}</p>
+            <button class="btn btn-gold delete">Delete</button>
+          </div>
+        </li>
+      {{/if}}
     </script>
 
     <!-- DEPENDENCIES -->

@@ -10,7 +10,8 @@ X Split urls off into their own model
   X regex for link to be a valid web address
   X Split them off into a file
 
-
+- Fix button on feed
+- Fix delete button
 
 
 - Create a local path variable
