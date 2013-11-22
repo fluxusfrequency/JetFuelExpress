@@ -1,3 +1,5 @@
+mongo jetfuelexpress_test --eval 'db.dropDatabase();'
+
 X Fix server tests by using .last or createdDate
 
 

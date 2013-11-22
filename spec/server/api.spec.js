@@ -1,6 +1,7 @@
 var request = require('request');
 var generator = require('../../lib/generator');
 var app = require('../../server');
+var Url = require('../../lib/url');
 
 
 describe("api route", function() {
@@ -15,12 +16,29 @@ describe("api route", function() {
   });
 
   it("should respond with json to url INDEX json request", function(done) {
+    var url = new Url({ "originalUrl":"www.google.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url.save();
+    var url_2 = new Url({ "originalUrl":"www.geocities.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url_2.save();
     request("http://localhost:3000/api/urls", function(error, response, body) {
       expect(response.statusCode).toBe(200);
       expect(response.body).toContain('[{');
-      expect(response.body).toContain('"shortenedUrl":');
-      expect(response.body).toContain(',"originalUrl":');
-      expect(response.body).toContain(',"createdDate":');
+      expect(response.body).toContain('"slug":');
+      expect(response.body).toContain('"originalUrl":');
+      expect(response.body).toContain('"active":true');
+      expect(response.body).toContain('"visits":1');
+      expect(response.body).toContain('"userId":"0"');
+      expect(response.body).toContain('"createdDate":');
       expect(response.body).toContain('}]');
       var json = JSON.parse(response.body);
       var count = Object.keys(json).length;
@@ -34,8 +52,11 @@ describe("api route", function() {
       function(error, response, body) {
         expect(response.statusCode).toBe(200);
         expect(response.body).toContain('{');
-        expect(response.body).toContain(',"shortenedUrl"');
+        expect(response.body).toContain(',"slug"');
         expect(response.body).toContain(',"originalUrl":"www.google.com"');
+        expect(response.body).toContain('"active":true');
+        expect(response.body).toContain('"visits":1');
+        expect(response.body).toContain('"userId":"0"');
         expect(response.body).toContain(',"createdDate":');
         expect(response.body).toContain('}');
         expect(error).toBeNull;
@@ -44,29 +65,39 @@ describe("api route", function() {
   });
 
   it("should respond with json to url GET json request", function(done) {
-    var doc = new app['UrlModel']({ "originalUrl":"www.google.com", 
-                                    "shortenedUrl": generator.generate_slug()});
-    doc.save();
+    var url = new Url({ "originalUrl":"www.google.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url.save();
     request.get( "http://localhost:3000/api/urls/", function(error, response, body) {
         expect(response.statusCode).toBe(200);
         expect(response.body).toContain('{');
-        expect(response.body).toContain('"shortenedUrl":"' + doc.shortenedUrl + '"');
-        expect(response.body).toContain(',"originalUrl":"www.google.com"');
-        expect(response.body).toContain(',"createdDate":');
+        expect(response.body).toContain('"slug":"' + url.slug + '"');
+        expect(response.body).toContain('"originalUrl":"www.google.com"');
+        expect(response.body).toContain('"active":true');
+        expect(response.body).toContain('"visits":1');
+        expect(response.body).toContain('"userId":"0"');
+        expect(response.body).toContain('"createdDate":');
         expect(response.body).toContain('}');
         expect(error).toBeNull;
         done();
     });
   });
 
-  it("should redirect to url GET shortenedUrl json request", function(done) {
-    var doc = new app['UrlModel']({ "originalUrl":"www.lycos.com", 
-                                    "shortenedUrl": generator.generate_slug(),
-                                    "createdDate": Date.now()});
-    doc.save();
-    request.get( "http://localhost:3000/"  + doc.shortenedUrl, function(error, response, body) {
-      console.log(response.body);
+  it("should REDIRECT to url GET slug json request", function(done) {
+    var url = new Url({ "originalUrl":"www.lycos.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url.save();
+    request.get( "http://localhost:3000/"  + url.slug, function(error, response, body) {
         expect(response.statusCode).toBe(200);
+        console.log(response);
         expect(response.body).toContain("Lycos is your source for all the Web has to offer");
         expect(error).toBeNull;
         done();
@@ -74,15 +105,18 @@ describe("api route", function() {
   });
 
   it ("should respond with json to url UPDATE json request", function(done) {
-    var doc = new app['UrlModel']({ "originalUrl":"www.altavista.com", 
-                                    "shortenedUrl": generator.generate_slug(),
-                                    "createdDate": Date.now()});
-    doc.save();
-    request.put("http://localhost:3000/api/urls/" + doc.shortenedUrl, {form:{"originalUrl": "www.geocities.com"}},
+    var url = new Url({ "originalUrl":"www.google.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url.save();
+    request.put("http://localhost:3000/api/urls/" + url.slug, {form:{"originalUrl": "www.geocities.com"}},
       function(error, response, body) {
         expect(response.statusCode).toBe(200);
         expect(response.body).toContain('{');
-        expect(response.body).toContain('"shortenedUrl":"' + doc.shortenedUrl + '"');
+        expect(response.body).toContain('"slug":"' + url.slug + '"');
         expect(response.body).toContain('"originalUrl":"www.geocities.com"');
         expect(response.body).toContain('"createdDate":');
         expect(response.body).toContain('}');
@@ -92,12 +126,15 @@ describe("api route", function() {
   });
 
   it("should respond with json to url DELETE json request", function(done) {
-    var doc = new app['UrlModel']({ "originalUrl":"www.angelfire.com", 
-                                    "shortenedUrl": generator.generate_slug(),
-                                    "createdDate": Date.now()});
-    doc.save();
-    request.del("http://localhost:3000/api/urls/" + doc.shortenedUrl, function(error, response, body) {
-      expect(response.body).toContain("Success")
+    var url = new Url({ "originalUrl":"www.google.com", 
+                        "slug": generator.generate_slug(),
+                        "active":true,
+                        "visits": 1,
+                        "userId": "0",
+                        "createdDate": Date.now()});
+    url.save();
+    request.del("http://localhost:3000/api/urls/" + url.slug, function(error, response, body) {
+      expect(response.body).toContain("Success!")
       expect(error).toBeNull;
       done();
     });

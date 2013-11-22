@@ -7,9 +7,11 @@ var express = require('express');
 var mongoose = require ( 'mongoose' );
 var http = require('http');
 var path = require('path');
-var generator = require('./lib/generator');
 
 var application_root = __dirname;
+
+var generator = require('./lib/generator');
+var Url = require('./lib/url');
 
 
 
@@ -66,28 +68,7 @@ if ('test' == app.get('env')) {
 
 
 
-
-// Schema
-
-var UrlSchema = new mongoose.Schema({
-  title: String,
-  shortenedUrl: String,
-  originalUrl: String,
-  description: String,
-  createdDate: String
-});
-
-// Models
-
-var UrlModel = mongoose.model( 'Urls', UrlSchema);
-app["UrlModel"] = UrlModel;
-
-
-
-
-
 //Routes
-
 
 
 //ROOT
@@ -99,7 +80,7 @@ app.get('/api', function(request, response) {
 // INDEX
 
 app.get( '/api/urls', function( request, response ) {
-  return UrlModel.find( function( err, url ) {
+  return Url.find( function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
@@ -111,9 +92,12 @@ app.get( '/api/urls', function( request, response ) {
 // CREATE
 
 app.post( '/api/urls', function( request, response ) {
-  var url = new UrlModel({
-    shortenedUrl: generator.generate_slug(),
+  var url = new Url({
+    slug: generator.generate_slug(),
     originalUrl: request.body.originalUrl,
+    active: request.body.active || true,
+    visits: request.body.visits + 1 || 1,
+    userId: request.body.userId || "0",
     createdDate: Date.now()
   });
 
@@ -126,7 +110,7 @@ app.post( '/api/urls', function( request, response ) {
 // SHOW
 
 app.get( '/api/urls/:shortened', function( request, response ) {
-  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
+  var found = Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
@@ -138,7 +122,7 @@ app.get( '/api/urls/:shortened', function( request, response ) {
 // REDIRECT
 
 app.get( '/:shortened', function( request, response ) {
-  var found = UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
+  var found = Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
@@ -150,10 +134,13 @@ app.get( '/:shortened', function( request, response ) {
 // UPDATE
 
 app.put( '/api/urls/:shortened', function( request, response ) {
-  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
-    url.shortenedUrl = url.shortenedUrl;
+  return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
+    url.slug = url.slug;
     url.originalUrl = request.body.originalUrl;
-    url.createdDate = url.createdDate;
+    url.active = request.body.active || true,
+    url.visits = request.body.visits + 1 || 1,
+    url.userId = request.body.userId || "0",
+    url.createdDate = url.createdDate || Date.now();
 
     return url.save( function( err, url ) {
       if( err ) response.json( err );
@@ -165,7 +152,7 @@ app.put( '/api/urls/:shortened', function( request, response ) {
 // DELETE
 
 app.delete( '/api/urls/:shortened', function( request, response ) {
-  return UrlModel.findOne({ 'shortenedUrl': request.params.shortened }, function( err, url ) {
+  return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
 
     return url.remove( function( err, url ) {
       if( err ) response.json( err );
