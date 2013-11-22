@@ -2,22 +2,18 @@ mongo jetfuelexpress_test --eval 'db.dropDatabase();'
 
 X Fix server tests by using .last or createdDate
 
-
-
-
-
-
-
-
-
-- Split urls off into their own model
+X Split urls off into their own model
   X Test them with Jasmine
   X Needs original, slug, active, visits, createdDate, userID
   X Remove unneeded attrs 
-  - Give them validations for presence and length
-  - regex for link to be a valid web address
-  - Split them off into a file
+  X Give them validations for presence and length
+  X regex for link to be a valid web address
+  X Split them off into a file
 
+
+
+
+- Create a local path variable
 
 - Use Zombie to test the view behavior currently
   - Bind the shorten button on the index page to create another url immediately

@@ -22,13 +22,11 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     var formData = {};
 
     var new_link = this.$('#originalUrl').val();
-    var shortened_link = '1239fj';
     $.ajax({
       url: '/api/urls',
       type: 'POST',
       dataType: 'json',
-      data: { "originalUrl": new_link, 
-              "shortenedUrl": shortened_link },
+      data: { "originalUrl": new_link },
       success: function(data) {
         Backbone.history.navigate('shorten', {trigger: true});
       },
