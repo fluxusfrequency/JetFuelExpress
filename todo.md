@@ -16,12 +16,12 @@ X Split urls off into their own model
 
 - Split off the routes
 - Fix button on feed
-- Fix delete button
+- Fix delete button / it's posting on refresh!?
 - Fix ability to post to url bar without handlebars breaking everything
-
-
-
 - Create a local path variable
+
+
+
 
 - Use Zombie to test the view behavior currently
   - Bind the shorten button on the index page to create another url immediately

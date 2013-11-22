@@ -3,8 +3,11 @@ var generator = require('../../lib/generator');
 var app = require('../../server');
 var Url = require('../../lib/url');
 
-
 describe("api route", function() {
+
+  beforeEach(function() {
+    Url.remove({}, function(){});
+  });
 
   it("should respond successfully with to an API request", function(done) {
     request("http://localhost:3000/api", function(error, response, body) {
@@ -42,7 +45,7 @@ describe("api route", function() {
       expect(response.body).toContain('}]');
       var json = JSON.parse(response.body);
       var count = Object.keys(json).length;
-      expect(count).toBeGreaterThan(1);
+      expect(count).toBe(2);
       done();
     });
   });
