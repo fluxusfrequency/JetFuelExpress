@@ -11,6 +11,8 @@ var generator = require('./lib/generator');
 
 var application_root = __dirname;
 
+
+
 // Create server
 var app = express();
 
@@ -48,6 +50,23 @@ app.configure( function() {
   app.use( "/", ( path.join( application_root, 'public') ) );
 });
 
+// Development only
+if ('development' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress');
+}
+
+// Test only
+if ('test' == app.get('env')) {
+  // Show all errors in development
+  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
+  mongoose.connect('mongodb://localhost/jetfuelexpress_test');
+}
+
+
+
+
 // Schema
 
 var UrlSchema = new mongoose.Schema({
@@ -63,19 +82,6 @@ var UrlSchema = new mongoose.Schema({
 var UrlModel = mongoose.model( 'Urls', UrlSchema);
 app["UrlModel"] = UrlModel;
 
-// Development only
-if ('development' == app.get('env')) {
-  // Show all errors in development
-  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  mongoose.connect('mongodb://localhost/jetfuelexpress');
-}
-
-// Test only
-if ('test' == app.get('env')) {
-  // Show all errors in development
-  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}));
-  mongoose.connect('mongodb://localhost/jetfuelexpress_test');
-}
 
 
 

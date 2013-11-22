@@ -1,8 +1,6 @@
 var request = require('request');
-var generator = require('../lib/generator');
-var app = require('../server');
-// var UrlModel = mongoose.model( 'Urls', UrlSchema);
-
+var generator = require('../../lib/generator');
+var app = require('../../server');
 
 
 describe("api route", function() {

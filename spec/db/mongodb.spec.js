@@ -1,5 +1,5 @@
 var request = require('request');
-var app = require('../server');
+var app = require('../../server');
 
 describe("MongoDB", function() {
   it("should be running", function(done) {
