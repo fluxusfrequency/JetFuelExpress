@@ -10,8 +10,15 @@ X Split urls off into their own model
   X regex for link to be a valid web address
   X Split them off into a file
 
+
+
+
+
+- Split off the routes
 - Fix button on feed
 - Fix delete button
+- Fix ability to post to url bar without handlebars breaking everything
+
 
 
 - Create a local path variable
