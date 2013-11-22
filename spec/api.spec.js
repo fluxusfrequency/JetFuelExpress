@@ -61,6 +61,20 @@ describe("api route", function() {
     });
   });
 
+  it("should redirect to url GET shortenedUrl json request", function(done) {
+    var doc = new app['UrlModel']({ "originalUrl":"www.lycos.com", 
+                                    "shortenedUrl": generator.generate_slug(),
+                                    "createdDate": Date.now()});
+    doc.save();
+    request.get( "http://localhost:3000/"  + doc.shortenedUrl, function(error, response, body) {
+      console.log(response.body);
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toContain("Lycos is your source for all the Web has to offer");
+        expect(error).toBeNull;
+        done();
+    });
+  });
+
   it ("should respond with json to url UPDATE json request", function(done) {
     var doc = new app['UrlModel']({ "originalUrl":"www.altavista.com", 
                                     "shortenedUrl": generator.generate_slug(),
