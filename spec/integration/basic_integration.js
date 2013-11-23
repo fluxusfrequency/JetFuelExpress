@@ -1,6 +1,6 @@
 var Browser = require('zombie');
 var assert = require('assert');
-var mocha = require('mocha');
+// var promise = require('promise');
 
 browser = new Browser();
 
@@ -17,22 +17,6 @@ browser.visit("http://localhost:3000/", function() {
 });
 
 
-describe("visit", function() {
-  before(function(done) {
-    this.browser = new Browser();
-    this.browser
-      .visit("/")
-      .fill("#originalUrl", "www.google.com")
-      .
-
-      .then(done, done);
-  });
-
-  it("should load the promises page", function() {
-    assert.equal(this.browser.location.pathname, "/promises");
-  });
-});
-
 // Submit a link to shorten
 
 browser.visit("http://localhost:3000/", function() {
@@ -40,7 +24,7 @@ browser.visit("http://localhost:3000/", function() {
   pressButton("Shorten", function() {
     assert.ok(browser.success);
     assert.equal(browser.location.pathname, "/shorten");
-    assert.equal(browser.text("", ))
+    assert.equal(browser.text("#url-template"), "Your Shortened Link");
     console.log("Redirected to /shorten");
   });
 });

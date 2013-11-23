@@ -5,7 +5,13 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
 
   initialize: function(initialUrls) {
     this.urlCollection = new jetfuelexpress.UrlCollection();
-    this.urlCollection.fetch({reset: true});
+    var that = this;
+
+    this.urlCollection.fetch({reset: true, success: function() {
+      that.fetched = true; 
+      }
+    });
+    
     this.render();
 
     this.listenTo(this.urlCollection, 'add', this.renderUrl);
@@ -13,9 +19,19 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
   },
 
   render: function() {
-    this.urlCollection.each(function(item) {
-      this.renderUrl(item);
-    }, this);
+    done = function() {
+      this.$el.empty();
+      this.urlCollection.each(function(item) {
+        this.renderUrl(item);
+      }, this);
+    }
+
+    interval = setInterval(function() {
+      if this.fetched {
+        cancelInterval(interval);
+        done();
+      }
+    }, 50);
   },
 
   renderUrl: function(item) {
