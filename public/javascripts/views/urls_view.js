@@ -8,7 +8,7 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
     var that = this;
 
     this.urlCollection.fetch({reset: true, success: function() {
-      that.fetched = true; 
+      that.fetched = true;
       }
     });
     
@@ -19,19 +19,22 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
   },
 
   render: function() {
-    done = function() {
+    // var done = function() {
+    //   var that = this;
       this.$el.empty();
       this.urlCollection.each(function(item) {
         this.renderUrl(item);
       }, this);
-    }
+    // };
+    // done();
+    // var interval = setInterval(function() {
+    //   if (this.fetched) {
+    //     cancelInterval(interval);
+    //     done();
+    //   }
+    // }, 50);
 
-    interval = setInterval(function() {
-      if this.fetched {
-        cancelInterval(interval);
-        done();
-      }
-    }, 50);
+    // interval();
   },
 
   renderUrl: function(item) {
