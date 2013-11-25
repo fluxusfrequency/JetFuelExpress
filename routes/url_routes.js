@@ -1,11 +1,11 @@
 Url = require('../lib/url');
-generator = require('../lib/generator')
+generator = require('../lib/generator');
 
 
 //ROOT
 
 exports.root = function(request, response) {
-  response.send( 'JetFuelExpress API is running!')
+  response.send( 'JetFuelExpress API is running!');
 };
 
 // INDEX
