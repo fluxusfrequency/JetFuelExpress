@@ -16,14 +16,14 @@ exports.create = function( request, response ) {
   });
 };
 
-// // SHOW
+// SHOW
 
-// exports.show = function( request, response ) {
-//   var found = Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
-//     if ( err ) {
-//       response.json( err );
-//     } else {
-//       return response.send( url );
-//     }
-//   });
-// };
+exports.show = function( request, response ) {
+  var found = User.findById( request.params.id , function( err, user ) {
+    if ( err ) {
+      response.json( err );
+    } else {
+      return response.send( user );
+    }
+  });
+};

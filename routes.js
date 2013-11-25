@@ -18,5 +18,6 @@ module.exports = function(app) {
   // User Routes
 
   app.post( '/api/users/',            userController.create);
+  app.get( '/api/users/:id',             userController.show);
 
 };
