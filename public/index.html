@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css" media="screen">
 
     <link rel="stylesheet" href="stylesheets/sub-theme-tan.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if IE]>
@@ -30,9 +31,7 @@
 
       <section id="urls">
         <article>
-          <div class="container">
-            <ul class="row-fluid url-list">
-            </ul>
+          <div class="container url-list">
           </div>
         </article>
       </section>
@@ -156,17 +155,11 @@
 
     <script type="text/x-handlebars-template" id="url-template">
       {{#if active }}
-        <li class="span12">
-          <div class="box">
-            <!-- Edit your article content here -->
-            <h3>Your Shortened Link</h3>
-            <p>ShortLink: <a href="/{{ slug }}">localhost:3000/{{ slug }}</a></p>
-            <p>Original url: <a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></p>
-            <p>Views: {{ visits }}</p>
-            <p>Date Created: {{ createdDate }}</p>
-            <button class="btn btn-gold delete">Delete</button>
-          </div>
-        </li>
+        <h4><a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></h4>
+        <h5>ShortLink: <a href="/{{ slug }}">localhost:3000/{{ slug }}</a></h5>
+        <p class="view-stats">Views: {{ visits }}  |  Date Created: {{ createdDate }}</p>
+        <button class="btn btn-small btn-warning delete">Delete</button>
+        <hr />
       {{/if}}
     </script>
 

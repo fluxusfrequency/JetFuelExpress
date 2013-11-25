@@ -41,7 +41,7 @@ jetfuelexpress.UrlsView = Backbone.View.extend({
     var urlView = new jetfuelexpress.UrlView({
       model: item
     });
-    this.$el.append(urlView.render().el);
+    this.$el.prepend(urlView.render().el);
   }
 
 });
