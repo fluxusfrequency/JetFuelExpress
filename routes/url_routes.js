@@ -53,12 +53,13 @@ exports.show = function( request, response ) {
 // REDIRECT
 
 exports.redirect = function( request, response ) {
-  var found = Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
-    if ( err ) {
-      response.json( err );
-    } else {
-      return response.redirect("http://" + url.originalUrl);
-    }
+  return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
+    url.visits += 1;
+    url.save(function( err, url ) {
+      if( err ) response.json( err );
+    });
+
+    return response.redirect("http://" + url.originalUrl);
   });
 };
 
@@ -69,7 +70,7 @@ exports.update = function( request, response ) {
     url.slug = url.slug;
     url.originalUrl = request.body.originalUrl;
     url.active = request.body.active || true,
-    url.visits = request.body.visits + 1 || 1,
+    url.visits = request.body.visits || 1,
     url.userId = request.body.userId || "0",
     url.createdDate = url.createdDate || Date.now();
 
