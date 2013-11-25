@@ -1,7 +1,6 @@
 var request = require('request');
 var generator = require('../../lib/generator');
 var app = require('../../server');
-var Url = require('../../lib/url');
 
 describe("api route", function() {
 

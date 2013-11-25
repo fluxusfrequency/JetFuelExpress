@@ -10,12 +10,38 @@ X Split urls off into their own model
   X regex for link to be a valid web address
   X Split them off into a file
 
+X Fix button on feed
+X Split off the routes in server
+X Add some padding to the links container
+
+
+- Create a user class
+  - Test it
+  - Build it modularly
+  - Give it validations
+  - Hook up User Id to the URLs
+
+- Build authentication
+  - Write a zombie test for authentication behavior
+  - Write a test for sessions
+    - Build sessions
+  - Write a test for Encryption
+    - Encrypt the users passwords
+  - Create a sign up or sign in link
+  - Create a sign in or sign up view
+  - Test the route in backbone
+  - Route the view in backbone
+
+- Build authorization
+  - Write a zombie test to make sure that a user can see his own shortened links
+  - Allow a user to edit her urls
+  - Authorize the delete button
+  - Create inactive link
+  - Create a user profile page
 
 
 
-
-- Split off the routes
-- Fix button on feed
+- Put the last url at the top
 - Fix delete button / it's posting on refresh!?
 - Fix ability to post to url bar without handlebars breaking everything
 - Create a local path variable
@@ -42,7 +68,6 @@ X Split urls off into their own model
     - Create sort by links in the index view for both sorting methods
 
 
-- Add some padding to the links container
 - Create an environment variable for the current host path and update the 
   associated links in the template
 
@@ -54,29 +79,6 @@ X Split urls off into their own model
   - Validate the slug isn't already in use
   - Verify the slug is saved correctly
 
-- Create a user class
-  - Test it
-  - Build it modularly
-  - Give it validations
-  - Hook up User Id to the URLs
-
-- Build authentication
-  - Write a zombie test for authentication behavior
-  - Write a test for sessions
-    - Build sessions
-  - Write a test for Encryption
-    - Encrypt the users passwords
-  - Create a sign up or sign in link
-  - Create a sign in or sign up view
-  - Test the route in backbone
-  - Route the view in backbone
-
-- Build authorization
-  - Write a zombie test to make sure that a user can see his own shortened links
-  - Allow a user to edit her urls
-  - Authorize the delete button
-  - Create inactive link
-  - Create a user profile page
 
 - Build statistics
   - Write a zombie test for the ability to view statistics (show page)
