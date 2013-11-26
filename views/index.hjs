@@ -43,7 +43,7 @@
           </div>
           <div>
             <%= jetfuelexpress.current_user ? 
-            "Hello, " + jetfuelexpress.current_user.username + " <a href='/logout' id='logout-link'>Log Out</a>" : 
+            "Hello, " + jetfuelexpress.current_user.username + "<a href='#' id='feed-link'> My Links </button><a href='/logout' id='logout-link'> Log Out</a>" : 
             "Hello, Guest! <a href='/signup' id='signup-link'>Sign Up</a> <a href='/login' id='login-link'>Log In</a>"
              %>
           </div>
@@ -53,6 +53,7 @@
 
           <div id="header-message">
           </div>
+
 
           <form id="addUrl" action="#">
             <input id="originalUrl" type="text" placeholder="Paste your link" required />
@@ -162,8 +163,7 @@
       <article>
         <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
         <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
-        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
-        <button class="btn btn-small btn-warning delete">Delete</button>
+        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %></p>
       </article>
     </script>
 

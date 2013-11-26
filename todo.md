@@ -15,12 +15,20 @@ X Split off the routes in server
 X Add some padding to the links container
 
 
-- Create a user class
-  - Test it
-  - Build it modularly
-  - Give it validations
-  - Hook up User Id to the URLs
+X Create a user class
+  X Test it
+  X Build it modularly
+  X Give it validations
+  X Hook up User Id to the URLs
 
+- Build authorization
+  - Write a zombie test to make sure that a user can see his own shortened links
+  - Allow a user to edit her urls
+  - Authorize the delete button
+  - Create inactive link
+  - Create a user profile page
+
+  
 - Build authentication
   - Write a zombie test for authentication behavior
   - Write a test for sessions
@@ -32,12 +40,6 @@ X Add some padding to the links container
   - Test the route in backbone
   - Route the view in backbone
 
-- Build authorization
-  - Write a zombie test to make sure that a user can see his own shortened links
-  - Allow a user to edit her urls
-  - Authorize the delete button
-  - Create inactive link
-  - Create a user profile page
 
 
 

@@ -5,9 +5,10 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
 
   events: {
     'click .brand': "showHome",
-    'click #submit-button': 'addUrl',
+    'click #feed-link': 'showFeed',
     'click #login-link': 'login',
     'click #signup-link': 'signup',
+    'click #submit-button': 'addUrl',
   },
 
   render: function () {
@@ -54,6 +55,11 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     e.preventDefault();
     Backbone.history.navigate('login', {trigger:false});
     jetfuelexpress.appView.showLogin();
+  },
+
+  showFeed: function(e) {
+    e.preventDefault();
+    Backbone.history.navigate('feed', {trigger: true});
   },
 
   // logout: function(e) {
