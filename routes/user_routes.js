@@ -12,7 +12,7 @@ exports.create = function( request, response ) {
 
   user.save( function( err, user ) {
     if( err ) response.json( err );
-    response.send( user );
+    response.redirect( '/' );
   });
 };
 
@@ -27,3 +27,9 @@ exports.show = function( request, response ) {
     }
   });
 };
+
+// CURRENT
+exports.current_user = function( request, response ) {
+  var user = request.user;
+  return response.send( user );
+} 

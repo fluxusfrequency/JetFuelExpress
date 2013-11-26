@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>JetFuelExpress</title>
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,width=device-width">
+
+    <!-- Stylesheets -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css" media="screen">
+
+    <link rel="stylesheet" href="stylesheets/sub-theme-tan.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+
+    <div class="container">
+
+      <header id="header"><h1 id="title">JetFuel Express HJS</h1></header>
+
+      <section id="main"></section>
+
+      <section id="urls">
+        <article>
+          
+        </article>
+      </section>
+
+      <section id="footer"></section>
+
+
+    </div>
+
+    <script type="text/x-handlebars-template" id="header-template">
+        <nav>
+          <div class="container">
+            <!-- Edit your brand name here -->
+            <a href="#" class="brand">JetFuel Express</a>
+            
+          </div>
+        </nav>
+
+        <section class="container" id="header-section">
+
+          <div id="header-message">
+          </div>
+
+          <form id="addUrl" action="#">
+            <input id="originalUrl" type="text" placeholder="Paste your link" required />
+            <button class="btn btn-gold" id="submit-button">Shorten</button>
+          </form>
+          
+        </section>
+
+    </script>
+
+    <script type="text/x-handlebars-template" id="footer-template">
+      <footer>
+        <div class="container">
+          <ul class="row-fluid">
+            <!-- Edit your footer content here -->
+            <li>
+              <a href="">About Us</a>
+            </li>
+            <li>
+              <a href="">Terms of Use</a>
+            </li>
+            <li>
+              <a href="">Privacy</a>
+            </li>
+            <li>
+              <a href="">Social</a>
+            </li>
+            <li>
+              <a href="">Contact Us</a>
+            </li>
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Edit your copyright here -->
+        <p>Built by Ben Lewis, with apologies to Bit.ly. For demo purposes only.</p>        
+      </footer>
+    </script>
+
+    <script type="text/x-handlebars-template" id="welcome-template">      
+      <h1>Making it easy to share the web</h1>
+      <h2>JetFuel Express is the fast and easy way to 
+      manage your links.</h2>
+    </script>
+
+    <script type="text/x-handlebars-template" id="home-template">
+      <article>
+        <div class="container">
+          <ul class="row-fluid">
+            <li class="span3"> 
+              <i class="foundicon-checkmark"></i>
+              <div class="box">
+                <!-- Edit your article content here -->
+                <h3>Fast</h3>
+                <p>
+                  Built on the ultra-fast Node.js framework Express.js, so you
+                  can get your links ready with less waiting.
+                </p>
+              </div>
+            </li>
+            <li class="span3"> 
+              <i class="foundicon-edit"></i>
+              <div class="box">
+                <!-- Edit your article content here -->
+                <h3>Convenient</h3>
+                <p>
+                  JetFuelExpress remembers your shortened links, so you can use
+                  them again with no effort.
+                </p>
+              </div>
+            </li>
+            <li class="span3">
+              <i class="foundicon-tools"></i>
+              <div class="box">
+                <!-- Edit your article content here -->
+                <h3>Social</h3>
+                <p>
+                  Show your friends what youre reading. Share links via Twitter.
+                </p>
+              </div>
+            </li>
+            <li class="span3">
+              <i class="foundicon-add-doc"></i>
+              <div class="box">
+                <!-- Edit your article content here -->
+                <h3>Responsive</h3>
+                <p>
+                  JetFuel Express looks great on a wide variety of devices. Check
+                  it out on your tablet, phone, or other device!
+                </p>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </script>
+
+    <script type="text/x-handlebars-template" id="url-template">
+      <h4><a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></h4>
+      <h5><a href="/{{ slug }}">ShortLink: localhost:3000/{{ slug }}</a></h5>
+      <p class="view-stats">Views: {{ visits }}  |  Date Created: {{ createdDate }}  |  </p>
+      <button class="btn btn-small btn-warning delete">Delete</button>
+      <hr />
+    </script>
+
+    <script type="text/x-handlebars-template" id="login-template">
+      <form action="/login" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <input type="submit" value="Log In"/>
+        </div>
+      </form>
+    </script>
+
+    <script type="text/x-handlebars-template" id="login-template">
+      <form action="/api/users/" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="text" name="email"/>
+        </div>
+        <div>
+            <input type="submit" value="Create User"/>
+        </div>
+      </form>
+    </script>
+
+    <!-- DEPENDENCIES -->
+    <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
+    <script src="javascripts/lib/json3.min.js"></script>
+    <script src="javascripts/lib/handlebars.js"></script>
+    <script src="javascripts/lib/underscore-min.js"></script>
+    <script src="javascripts/lib/backbone-min.js"></script>
+    <script src="javascripts/lib/jquery.dateFormat-1.0.js"></script>
+    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <!-- APP -->
+    <script src="javascripts/app.js"></script>
+    <script src="javascripts/routers/router.js"></script>
+    <script src="javascripts/models/url_model.js"></script>
+    <script src="javascripts/collections/url_collection.js"></script>
+    <script src="javascripts/views/app_view.js"></script>
+    <script src="javascripts/views/header_view.js"></script>
+    <script src="javascripts/views/footer_view.js"></script>
+    <script src="javascripts/views/welcome_view.js"></script>
+    <script src="javascripts/views/home_view.js"></script>
+    <script src="javascripts/views/url_view.js"></script>
+    <script src="javascripts/views/urls_view.js"></script>
+
+  </body>
+
+  
+</html>

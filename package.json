@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "3.4.4",
-    "jade": "*",
+    "hjs": "*",
     "less-middleware": "*",
     "path": "~0.4.9",
     "request": "2.27.0",

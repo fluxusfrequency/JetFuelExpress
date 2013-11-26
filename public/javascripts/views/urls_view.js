@@ -1,40 +1,22 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.UrlsView = Backbone.View.extend({
-  el: '.url-list',
+  className: 'url-list',
 
   initialize: function(initialUrls) {
-    this.urlCollection = new jetfuelexpress.UrlCollection();
-    var that = this;
+    jetfuelexpress.urlCollection = new jetfuelexpress.UrlCollection();
+    jetfuelexpress.urlCollection.fetch({ reset: true });
 
-    this.urlCollection.fetch({reset: true, success: function() {
-      that.fetched = true;
-      }
-    });
-    
-    this.render();
-
-    this.listenTo(this.urlCollection, 'add', this.renderUrl);
-    this.listenTo(this.urlCollection, 'reset', this.render);
+    this.listenTo(jetfuelexpress.urlCollection, 'add', this.renderUrl);
+    this.listenTo(jetfuelexpress.urlCollection, 'reset', this.render);
   },
 
   render: function() {
-    // var done = function() {
-    //   var that = this;
-      this.$el.empty();
-      this.urlCollection.each(function(item) {
-        this.renderUrl(item);
-      }, this);
-    // };
-    // done();
-    // var interval = setInterval(function() {
-    //   if (this.fetched) {
-    //     cancelInterval(interval);
-    //     done();
-    //   }
-    // }, 50);
-
-    // interval();
+    this.$el.empty();
+    jetfuelexpress.urlCollection.each(function(item) {
+      this.renderUrl(item);
+    }, this);
+    return this;
   },
 
   renderUrl: function(item) {

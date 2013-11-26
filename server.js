@@ -22,7 +22,7 @@ app.configure( function() {
   // all environments
   app.set('port', process.env.PORT || 3000);
   app.set('views', path.join(__dirname, 'views'));
-  app.set('view engine', 'jade');
+  app.set('view engine', 'hjs');
   app.set('title', 'JetFuelExpress')
 
   app.use(express.favicon());
@@ -43,13 +43,15 @@ app.configure( function() {
   // Check request.body for HTTP method overrides
   app.use( express.methodOverride() );
 
+  // app.use( "/", ( path.join( application_root, 'public') ) );
+
   // Perform route lookup based on URL and HTTP method
   app.use(app.router);
 
   // Where to serve static content
   app.use( express.static( path.join( application_root, 'public') ) );
 
-  app.use( "/", ( path.join( application_root, 'public') ) );
+
 });
 
 // Development only
@@ -92,7 +94,6 @@ passport.deserializeUser(function(id, done) {
 // Routes
 
 var routes = require('./routes')(app);
-
 
 
 // Start Server

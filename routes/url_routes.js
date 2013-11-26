@@ -11,11 +11,11 @@ exports.root = function(request, response) {
 // INDEX
 
 exports.index = function( request, response ) {
-  return Url.find( function( err, url ) {
+  return Url.find({ userId: request.user._id }, function( err, urls ) {
     if ( err ) {
       response.json( err );
     } else {
-      response.send( url );
+      response.send( urls );
     }
   });
 };
@@ -28,7 +28,7 @@ exports.create = function( request, response ) {
     originalUrl: request.body.originalUrl,
     active: request.body.active || true,
     visits: request.body.visits + 1 || 1,
-    userId: request.body.userId || "0",
+    userId: (request.user ? request.user._id : "0"),
     createdDate: Date.now()
   });
 

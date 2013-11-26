@@ -28,10 +28,11 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
       dataType: 'json',
       data: { "originalUrl": new_link },
       success: function(data) {
-        Backbone.history.navigate('shorten', {trigger: false});
-        jetfuelexpress.appView.showUrls();
+        Backbone.history.navigate('shorten', {trigger: (Backbone.history.loc === 'shorten' ? false : true)});
+        jetfuelexpress.urlCollection.add(data);
       },
       error: function(response) {
+
         var errors = response.responseJSON;
         if(errors) {
           $('#originalUrl').html(errors);

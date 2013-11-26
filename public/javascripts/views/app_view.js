@@ -34,19 +34,25 @@ jetfuelexpress.AppView = Backbone.View.extend({
   },
 
   showWelcome: function() {
+    this.urlsView = null;
     var view = new jetfuelexpress.WelcomeView();
     $('#header-message').html(view.render().el);
   },
 
   showUrls: function() {
-    this.$main.html('');
+    $('#home-template').html('');
     $('#header-message').html('<h2>Paste Another Link to Shorten</h2>');
-    var view = new jetfuelexpress.UrlsView();
+    var view = this.urls();
     this.swapMain(view);
   },
 
   swapMain: function(view) {
     this.$main.html(view.render().el);
-    // this.$main.html(view.render());
+  },
+
+  urls: function() {
+    this.urlsView = this.urlsView || new jetfuelexpress.UrlsView();
+    return this.urlsView;
   }
+
 });
