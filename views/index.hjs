@@ -23,6 +23,7 @@
 
     <div class="container">
 
+
       <header id="header"><h1 id="title">JetFuel Express HJS</h1></header>
 
       <section id="main"></section>
@@ -38,11 +39,13 @@
 
     </div>
 
-    <script type="text/x-handlebars-template" id="header-template">
+    <script type="text/text-template" id="header-template">
         <nav>
           <div class="container">
-            <!-- Edit your brand name here -->
-            <a href="#" class="brand">JetFuel Express</a>
+            <a href="#" class="brand">{{ title }}</a>
+            
+          </div>
+          <div>
             <a href="/login" id="login-link">Log In</a>
             <a href="/logout" id="logout-link">Log Out</a>
             <a href="/signup" id="signup-link">Sign Up</a>
@@ -63,7 +66,7 @@
 
     </script>
 
-    <script type="text/x-handlebars-template" id="footer-template">
+    <script type="text/text-template" id="footer-template">
       <footer>
         <div class="container">
           <ul class="row-fluid">
@@ -90,13 +93,13 @@
       </footer>
     </script>
 
-    <script type="text/x-handlebars-template" id="welcome-template">      
+    <script type="text/text-template" id="welcome-template">      
       <h1>Making it easy to share the web</h1>
       <h2>JetFuel Express is the fast and easy way to 
       manage your links.</h2>
     </script>
 
-    <script type="text/x-handlebars-template" id="home-template">
+    <script type="text/text-template" id="home-template">
       <article>
         <div class="container">
           <ul class="row-fluid">
@@ -157,7 +160,7 @@
       <hr />
     </script>
 
-    <script type="text/x-handlebars-template" id="login-template">
+    <script type="text/text-template" id="login-template">
       <h2>Log In To JetFuelExpress</h2>
       <form action="/login" method="post">
         <div>
@@ -174,7 +177,7 @@
       </form>
     </script>
 
-    <script type="text/x-handlebars-template" id="signup-template">
+    <script type="text/text-template" id="signup-template">
       <h2>Sign Up For JetFuelExpress</h2>
       <form action="/api/users/" method="post">
         <div>
@@ -198,7 +201,7 @@
     <!-- DEPENDENCIES -->
     <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
     <script src="javascripts/lib/json3.min.js"></script>
-    <script src="javascripts/lib/handlebars.js"></script>
+    <!--script src="javascripts/lib/handlebars.js"></script-->
     <script src="javascripts/lib/underscore-min.js"></script>
     <script src="javascripts/lib/backbone-min.js"></script>
     <script src="javascripts/lib/jquery.dateFormat-1.0.js"></script>

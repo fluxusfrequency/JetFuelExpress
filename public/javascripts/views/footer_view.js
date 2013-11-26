@@ -1,7 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.FooterView = Backbone.View.extend({
-  template: Handlebars.compile($('#footer-template').html()),
+  template: _.template($('#footer-template').html()),
 
   render: function () {
     this.$el.html(this.template());

@@ -1,7 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.HeaderView = Backbone.View.extend({
-  template: Handlebars.compile($('#header-template').html()),
+  template: _.template($('#header-template').html()),
 
   events: {
     'click .brand': "showHome",
