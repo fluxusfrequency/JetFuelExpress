@@ -2,9 +2,10 @@ var passport = require('passport');
 var path = require('path');
 var application_root = __dirname;
 
-var urlContoller = require('./routes/url_routes');
-var userController = require('./routes/user_routes');
-var indexController = require('./routes/index');
+var urlContoller = require('./routes/url_controller');
+var userController = require('./routes/user_controller');
+var indexController = require('./routes/index_controller');
+var authController = require('./routes/auth_controller');
 
 var Url = require('./lib/url');
 var User = require('./lib/user');
@@ -23,26 +24,8 @@ module.exports = function(app) {
 
   // Auth Routes
 
-  app.post('/login', 
-    passport.authenticate('local', {  successRedirect: '/',
-                                      failureRedirect: '/api/urls',
-                                      failureFlash: false })
-  );
-
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
-
-  // API Routes
-
-  app.get( '/api',                    urlContoller.root);
-  app.get( '/api/urls',               urlContoller.index);
-  app.post( '/api/urls',              urlContoller.create);
-  app.get( '/api/urls/:shortened',    urlContoller.show);
-  app.get( '/:shortened',             urlContoller.redirect);
-  app.put( '/api/urls/:shortened',    urlContoller.update);
-  app.delete( '/api/urls/:shortened', urlContoller.delete);
+  app.post('/login', authController.login);
+  app.get('/logout', authController.logout);
 
   // User Routes
 
@@ -50,5 +33,14 @@ module.exports = function(app) {
   app.get( '/api/users/current_user', userController.current_user);
   app.get( '/api/users/:username',    userController.show);
 
+  // API Routes
+
+  app.get( '/api',                    urlContoller.root);
+  app.get( '/api/urls',               urlContoller.index);
+  app.post( '/api/urls',              urlContoller.create);
+  app.get( '/api/urls/:shortened',    urlContoller.show);
+  app.put( '/api/urls/:shortened',    urlContoller.update);
+  app.delete( '/api/urls/:shortened', urlContoller.delete);
+  app.get( '/:shortened',             urlContoller.redirect);
 
 };

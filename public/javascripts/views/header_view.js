@@ -6,6 +6,9 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
   events: {
     'click .brand': "showHome",
     'click #submit-button': 'addUrl',
+    'click #login-link': 'login',
+    'click #logout-link': 'logout',
+    'click #signup-link': 'signup',
   },
 
   render: function () {
@@ -40,6 +43,18 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
       }
     });
     $('#originalUrl').val('');
+  },
+
+  login: function(e) {
+    e.preventDefault();
+  },
+
+  logout: function(e) {
+    e.preventDefault();
+  },
+
+  signup: function(e) {
+    e.preventDefault();
   }
 
 });
