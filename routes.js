@@ -1,3 +1,4 @@
+var passport = require('passport');
 var urlContoller = require('./routes/url_routes');
 var userController = require('./routes/user_routes');
 var Url = require('./lib/url');
@@ -18,6 +19,13 @@ module.exports = function(app) {
   // User Routes
 
   app.post( '/api/users/',            userController.create);
-  app.get( '/api/users/:id',             userController.show);
+  app.get( '/api/users/:username',          userController.show);
 
+  // Auth Routes
+
+  app.post('/login', 
+    passport.authenticate('local', { successRedirect: '/api/urls',
+                                      failureRedirect: '/',
+                                      failureFlash: false })
+  );
 };

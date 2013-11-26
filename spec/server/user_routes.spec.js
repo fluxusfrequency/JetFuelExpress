@@ -31,8 +31,8 @@ describe("api route", function() {
                          "createdDate": Date.now()});
 
     user.save();
-    var id = user._id.toString();
-    request.get( "http://localhost:3000/api/users/" + id, function(error, response, body) {
+    var un = user.username;
+    request.get( "http://localhost:3000/api/users/" + un, function(error, response, body) {
         expect(response.statusCode).toBe(200);
         expect(response.body).toContain('{');
         expect(response.body).toContain('"username":"janedoe"');

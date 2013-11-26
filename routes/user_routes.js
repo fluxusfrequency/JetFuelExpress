@@ -19,7 +19,7 @@ exports.create = function( request, response ) {
 // SHOW
 
 exports.show = function( request, response ) {
-  var found = User.findById( request.params.id , function( err, user ) {
+  var found = User.findOne({ 'username': request.params.username }, function( err, user ) {
     if ( err ) {
       response.json( err );
     } else {
