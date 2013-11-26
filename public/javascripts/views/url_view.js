@@ -11,8 +11,10 @@ jetfuelexpress.UrlView = Backbone.View.extend({
     'click .save': 'submitEdit'
   },
 
-  cancel: function() {
-    this.editUrl.empty();
+  cancel: function(e) {
+    e.preventDefault();
+    this.$el.html('');
+    this.render();
   },
 
   deleteUrl: function() {
