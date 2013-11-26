@@ -11,7 +11,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     'click #submit-button': 'addUrl',
   },
 
-  render: function () {
+  render: function() {
     this.$el.html(this.template());
     return this;
   },
@@ -23,7 +23,6 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
   addUrl: function(e) {
     e.preventDefault();
     var formData = {};
-
 
     var new_link = this.$('#originalUrl').val();
     $.ajax({

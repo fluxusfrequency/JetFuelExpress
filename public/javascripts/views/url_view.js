@@ -5,13 +5,18 @@ jetfuelexpress.UrlView = Backbone.View.extend({
   template: _.template( $('#url-template').html() ),
 
   events: {
-    'click .delete': 'deleteUrl'
+    'click .delete': 'deleteUrl',
+    'click .edit': 'editUrl'
   },
 
   deleteUrl: function() {
     this.model.destroy();
     this.remove();
     return false;
+  },
+
+  editUrl: function() {
+    this.model.update
   },
 
   render: function () {

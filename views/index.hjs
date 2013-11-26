@@ -154,8 +154,22 @@
         <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
         <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
         <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
+        <button class="btn btn-small btn-warning edit">Edit</button>
         <button class="btn btn-small btn-warning delete">Delete</button>
         <hr />
+      </article>
+    </script>
+
+    <script type="text/template" id="url-edit-template">
+      <article>
+        <form class="editUrl" action="#">
+          <input id="originalUrl" type="text" placeholder="Paste your link" />
+          <label for="originalUrl"><%= originalUrl %></label>
+          <input id="slug" type="text" placeholder=<%= slug %> />
+          <label for="slug">Shortlink</label>
+          <button class="btn btn-small btn-warning save">Save</button>
+          <button class="btn btn-small btn-warning delete">Delete</button>
+        </form>
       </article>
     </script>
 

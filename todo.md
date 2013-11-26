@@ -24,7 +24,7 @@ X Create a user class
 - Build authorization
   - Write a zombie test to make sure that a user can see his own shortened links
   - Allow a user to edit her urls
-  - Authorize the delete button
+  X Authorize the delete button
   - Create inactive link
   - Create a user profile page
 
