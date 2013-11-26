@@ -2,7 +2,7 @@ var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.UrlView = Backbone.View.extend({
   className: 'urlContainer',
-  template: Handlebars.compile($('#url-template').html() ),
+  template: _.template( $('#url-template').html() ),
 
   events: {
     'click .delete': 'deleteUrl'

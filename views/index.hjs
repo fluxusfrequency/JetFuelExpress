@@ -149,10 +149,10 @@
       </article>
     </script>
 
-    <script type="text/x-handlebars-template" id="url-template">
-      <h4><a href="http://{{ originalUrl }}/">{{ originalUrl }}</a></h4>
-      <h5><a href="/{{ slug }}">ShortLink: localhost:3000/{{ slug }}</a></h5>
-      <p class="view-stats">Views: {{ visits }}  |  Date Created: {{ createdDate }}  |  </p>
+    <script type="text/template" id="url-template">
+      <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
+      <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
+      <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
       <button class="btn btn-small btn-warning delete">Delete</button>
       <hr />
     </script>

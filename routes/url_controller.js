@@ -11,23 +11,13 @@ exports.root = function(request, response) {
 // INDEX
 
 exports.index = function( request, response ) {
-  if (request.user) {
-    return Url.find({ userId: request.user._id }, function( err, urls ) {
-      if ( err ) {
-        response.json( err );
-      } else {
-        response.send( urls );
-      }
-    });
-  } else {
-    return Url.find( function( err, urls) {
-      if ( err ) {
-        response.json( err );
-      } else {
-        response.send( urls );
-      }
-    });
-  }
+  return Url.find({ userId: request.user._id }, function( err, urls ) {
+    if ( err ) {
+      response.json( err );
+    } else {
+      response.send( urls );
+    }
+  });
 };
 
 // CREATE
@@ -64,16 +54,16 @@ exports.show = function( request, response ) {
 
 exports.redirect = function( request, response ) {
   return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
-    if ( !url ) {
-      response.redirect( '/' );
-    } else {
+    // if ( !url ) {
+    //   response.redirect( '/' );
+    // } else {
       url.visits += 1;
       url.save(function( err, url ) {
         if( err ) response.json( err );
       });
 
       return response.redirect("http://" + url.originalUrl);
-    }
+    // }
   });
 };
 
