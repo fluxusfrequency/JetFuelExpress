@@ -7,7 +7,13 @@ nav {
   padding-top: 5px;
   padding-right: 5px;
 }
-.urlContainer article {
+.urlContainer article{
+  padding: 10px;
+  margin: 10px 0;
+}
+.urlContainer article,
+#signup-article,
+#login-article {
   padding-left: 10px;
 }
 a {

@@ -8,7 +8,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     'click #feed-link': 'showFeed',
     'click #login-link': 'login',
     'click #signup-link': 'signup',
-    'click #submit-button': 'addUrl',
+    'click #submit-button': 'addUrl'
   },
 
   render: function() {

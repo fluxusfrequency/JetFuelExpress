@@ -80,14 +80,13 @@ exports.redirect = function( request, response ) {
 // UPDATE
 
 exports.update = function( request, response ) {
-  return Url.findOne({ 'slug': request.params.slug }, function( err, url ) {
-    url.slug = request.params.newSlug || url.slug;
+  return Url.findOne({ 'slug': request.body.slug }, function( err, url ) {
+    url.slug = request.body.newSlug || url.slug;
     url.originalUrl = request.body.newOriginal || url.originalUrl;
-    url.active = request.body.active || url.active || true;
+    url.active = (request.body.active === "true" ? true : url.active || true);
     url.visits = url.visits || 1;
     url.userId = request.body.userId || "0";
     url.createdDate = url.createdDate || Date.now();
-
     return url.save( function( err, url ) {
       if( err ) response.json( err );
       response.send( url );

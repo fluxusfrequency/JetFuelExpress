@@ -154,23 +154,31 @@
       <article>
         <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
         <h5><a href="/<%= slug %>"><%= "ShortLink: http://jfx.herokuapp.com/" + slug %></a></h5>
-        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
+        <p class="view-stats">Views: <%= visits %>  |  
+        Date Created: <%= createdDate %>  |  
+        <%= active ? "Active" : "Deactivated" %>  
+        </p>
         <button class="btn btn-small btn-warning edit">Edit</button>
         <button class="btn btn-small btn-warning delete">Delete</button>
-        <hr />
       </article>
     </script>
 
     <script type="text/template" id="url-edit-template">
-      <article>
-        <form class="editUrl" action="#">
-          <input id="originalUrl" type="text" placeholder="Paste your link" />
-          <label for="originalUrl"><%= originalUrl %></label>
-          <input id="slug" type="text" placeholder=<%= slug %> />
-          <label for="slug">Shortlink</label>
-          <button class="btn btn-small btn-warning save">Save</button>
-          <button class="btn btn-small btn-warning delete">Delete</button>
-        </form>
+      <article id="editArticle">
+        <fieldset>
+          <form class="editUrl" action="#">
+            <label for="newOriginal">Original Url: </label>
+            <input id="newOriginal" type="text" value=<%= "originalUrl" %> />
+            <label for="newSlug">Shortlink</label>
+            <input id="newSlug" type="text" value=<%= "slug" %> />
+            <label for="active">Active?</label>
+            <input id="active" type="text" value="true"/>
+            <br/>
+            <br/>
+            <button class="btn btn-small btn-warning save">Save</button>
+            <button class="btn btn-small btn-warning cancel">Cancel</button>
+          </form>
+        </fieldset>
       </article>
     </script>
 
@@ -183,12 +191,12 @@
     </script>
 
     <script type="text/text-template" id="login-template">
-      <article>
+      <article id="login-article">
         <h2>Log In To JetFuelExpress</h2>
         <form action="/login" method="post">
           <div>
               <label>Username:</label>
-              <input type="text" name="username"/>
+              <input type="text" name="username" autofocus />
           </div>
           <div>
               <label>Password:</label>
@@ -202,7 +210,7 @@
     </script>
 
     <script type="text/text-template" id="signup-template">
-      <article>
+      <article id="signup-article">
         <h2>Sign Up For JetFuelExpress</h2>
         <form action="/api/users/" method="post">
           <div>

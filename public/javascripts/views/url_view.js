@@ -5,8 +5,14 @@ jetfuelexpress.UrlView = Backbone.View.extend({
   template: _.template( $('#url-template').html() ),
 
   events: {
+    'click .cancel': 'cancel',
     'click .delete': 'deleteUrl',
-    'click .edit': 'editUrl'
+    'click .edit': 'editUrl',
+    'click .save': 'submitEdit'
+  },
+
+  cancel: function() {
+    this.editUrl.empty();
   },
 
   deleteUrl: function() {
@@ -17,31 +23,29 @@ jetfuelexpress.UrlView = Backbone.View.extend({
 
   editUrl: function(e) {
     e.preventDefault();
-    var template = _.template($('#url-edit-template').html());
-    var new_slug = this.$('#newSlug').val(); ||
-    var new_original = this.$('#newOriginal').val();
-    var active = this.$('#active').val();
-    this.submitEdit(new_slug);
-    this.model.update()
+
+    var edit_template = _.template($('#url-edit-template').html());
+    this.$el.html(edit_template());
+    return this;
   },
 
-  submitEdit: function() {
-
+  submitEdit: function(e) {
+    e.preventDefault();
+    var slug = this.model.attributes.slug;
+    var newSlug = this.$('#newSlug').val();
+    var newOriginal = this.$('#newOriginal').val();
+    var active = this.$('#active').val();
     $.ajax({
       url: '/api/urls/:slug',
       type: 'PUT',
       dataType: 'json',
-      data: { "originalUrl": new_link },
+      data: { "slug": slug, "newSlug": newSlug, "newOriginal": newOriginal, "active": active },
       success: function(data) {
-        if(jetfuelexpress.current_user) {
-          Backbone.history.navigate('feed', {trigger: (Backbone.history.loc === 'feed' ? false : true)});
-          jetfuelexpress.urlCollection.add(data);
-        } else {
-          Backbone.history.navigate('shorten', {trigger: false});
-          jetfuelexpress.appView.showLastUrl(data);
-        }
-      },
-  }
+        $('#editArticle').remove();
+        jetfuelexpress.urlCollection.add(data);
+      }
+    });
+  },
 
   render: function () {
     this.$el.append( this.template( this.model.toJSON() ) );

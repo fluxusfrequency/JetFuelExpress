@@ -1,6 +1,6 @@
 var passport = require('passport');
 
-exports.login = passport.authenticate('local', { successRedirect: '/',
+exports.login = passport.authenticate('local', { successRedirect: '/#feed',
                                                  failureRedirect: '/login'
 });
 
