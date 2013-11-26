@@ -17,16 +17,19 @@ jetfuelexpress.UrlView = Backbone.View.extend({
 
   editUrl: function(e) {
     e.preventDefault();
-    var formData={};
-
     var template = _.template($('#url-edit-template').html());
+    var new_slug = this.$('#newSlug').val(); ||
+    var new_original = this.$('#newOriginal').val();
+    var active = this.$('#active').val();
+    this.submitEdit(new_slug);
     this.model.update()
   },
 
   submitEdit: function() {
+
     $.ajax({
-      url: '/api/urls',
-      type: 'POST',
+      url: '/api/urls/:slug',
+      type: 'PUT',
       dataType: 'json',
       data: { "originalUrl": new_link },
       success: function(data) {

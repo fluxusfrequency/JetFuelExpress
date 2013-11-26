@@ -81,11 +81,11 @@ exports.redirect = function( request, response ) {
 
 exports.update = function( request, response ) {
   return Url.findOne({ 'slug': request.params.slug }, function( err, url ) {
-    url.slug = url.slug;
-    url.originalUrl = request.body.originalUrl;
-    url.active = request.body.active || true,
-    url.visits = request.body.visits || 1,
-    url.userId = request.body.userId || "0",
+    url.slug = request.params.newSlug || url.slug;
+    url.originalUrl = request.body.newOriginal || url.originalUrl;
+    url.active = request.body.active || url.active || true;
+    url.visits = url.visits || 1;
+    url.userId = request.body.userId || "0";
     url.createdDate = url.createdDate || Date.now();
 
     return url.save( function( err, url ) {
