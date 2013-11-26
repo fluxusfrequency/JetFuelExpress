@@ -47,7 +47,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
   login: function(e) {
     e.preventDefault();
     Backbone.history.navigate('login', {trigger:false});
-    jetfuelexpress.appView.render();
+    jetfuelexpress.appView.showLogin();
   },
 
   // logout: function(e) {
@@ -67,6 +67,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
   signup: function(e) {
     e.preventDefault();
     Backbone.history.navigate('signup', {trigger:true});
+    jetfuelexpress.appView.showSignup();
   }
 
 });

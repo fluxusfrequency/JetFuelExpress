@@ -54,7 +54,7 @@ jetfuelexpress.AppView = Backbone.View.extend({
   },
 
   showLogin: function() {
-    if (this.mainView) {this.mainView = null;}
+    // if (this.mainView) {this.mainView = null;}
     var view = this.login();
     this.swapMain(view);
   },
@@ -66,7 +66,7 @@ jetfuelexpress.AppView = Backbone.View.extend({
 
   showSignup: function() {
     if (this.mainView) {this.mainView = null;}
-    var view = this.login();
+    var view = this.signup();
     this.swapMain(view);
   },
 
@@ -76,14 +76,14 @@ jetfuelexpress.AppView = Backbone.View.extend({
   },
 
   showUrls: function() {
-    if (this.mainView) {this.mainView = null;}
+    // if (this.mainView) {this.mainView = null;}
     $('#header-message').html('<h2>Paste Another Link to Shorten</h2>');
     var view = this.urls();
     this.swapMain(view);
   },
 
   showWelcome: function() {
-    if (this.urlsView) {this.urlsView = null;}
+    // if (this.urlsView) {this.urlsView = null;}
     var view = new jetfuelexpress.WelcomeView();
     $('#header-message').html(view.render().el);
   },

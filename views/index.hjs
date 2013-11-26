@@ -158,6 +158,7 @@
     </script>
 
     <script type="text/x-handlebars-template" id="login-template">
+      <h2>Log In To JetFuelExpress</h2>
       <form action="/login" method="post">
         <div>
             <label>Username:</label>
@@ -168,12 +169,13 @@
             <input type="password" name="password"/>
         </div>
         <div>
-            <input type="submit" value="Log In"/>
+            <input type="submit" class="btn btn-small btn-warning" value="Log In"/>
         </div>
       </form>
     </script>
 
     <script type="text/x-handlebars-template" id="signup-template">
+      <h2>Sign Up For JetFuelExpress</h2>
       <form action="/api/users/" method="post">
         <div>
             <label>Username:</label>
@@ -188,7 +190,7 @@
             <input type="text" name="email"/>
         </div>
         <div>
-            <input type="submit" value="Create User"/>
+            <input type="submit" class="btn btn-small btn-warning" value="Create User"/>
         </div>
       </form>
     </script>
@@ -214,6 +216,8 @@
     <script src="javascripts/views/home_view.js"></script>
     <script src="javascripts/views/url_view.js"></script>
     <script src="javascripts/views/urls_view.js"></script>
+    <script src="javascripts/views/login_view.js"></script>
+    <script src="javascripts/views/signup_view.js"></script>
 
   </body>
 
