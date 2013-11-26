@@ -23,7 +23,6 @@
 
     <div class="container">
 
-
       <header id="header"><h1 id="title">JetFuel Express HJS</h1></header>
 
       <section id="main"></section>
@@ -43,12 +42,12 @@
         <nav>
           <div class="container">
             <a href="#" class="brand">{{ title }}</a>
-            
           </div>
           <div>
-            <a href="/login" id="login-link">Log In</a>
-            <a href="/logout" id="logout-link">Log Out</a>
-            <a href="/signup" id="signup-link">Sign Up</a>
+            <%= jetfuelexpress.current_user ? 
+            "Hello, " + jetfuelexpress.current_user.username + " <a href='/logout' id='logout-link'>Log Out</a>" : 
+            "Hello, Guest! <a href='/signup' id='signup-link'>Sign Up</a> <a href='/login' id='login-link'>Log In</a>"
+             %>
           </div>
         </nav>
 
