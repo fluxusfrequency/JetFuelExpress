@@ -7,3 +7,9 @@ nav {
   padding-top: 5px;
   padding-right: 5px;
 }
+.urlContainer article {
+  padding-left: 10px;
+}
+a {
+  color: black;
+}

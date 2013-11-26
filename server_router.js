@@ -18,7 +18,8 @@ module.exports = function(app) {
 
   // Alias Routes
 
-  app.get('/shorten', indexController.index);
+  app.get('/shorten', function(request, response){response.redirect('/#shorten');});
+  app.get('/feed', function(request, response){response.redirect('/#feed');});
 
   // Auth Routes
 

@@ -41,7 +41,7 @@
         <nav>
           <div id="nav-links">
             <%= jetfuelexpress.current_user ? 
-            "Hello, " + jetfuelexpress.current_user.username + "<a href='#' id='feed-link'> My Links </button><a href='/logout' id='logout-link'> Log Out</a>" : 
+            "Hello, " + jetfuelexpress.current_user.username + " <a href='#' id='feed-link'>My Links</a> <a href='/logout' id='logout-link'> Log Out</a>" : 
             "Hello, Guest! <a href='/signup' id='signup-link'>Sign Up</a> <a href='/login' id='login-link'>Log In</a>"
              %>
           </div>
