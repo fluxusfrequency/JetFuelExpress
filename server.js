@@ -93,7 +93,7 @@ passport.deserializeUser(function(id, done) {
 
 // Routes
 
-var routes = require('./routes')(app);
+var routes = require('./server_router')(app);
 
 
 // Start Server
