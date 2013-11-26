@@ -51,7 +51,7 @@ exports.create = function( request, response ) {
 // SHOW
 
 exports.show = function( request, response ) {
-  var found = Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
+  var found = Url.findOne({ 'slug': request.params.slug }, function( err, url ) {
     if ( err ) {
       response.json( err );
     } else {
@@ -80,7 +80,7 @@ exports.redirect = function( request, response ) {
 // UPDATE
 
 exports.update = function( request, response ) {
-  return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
+  return Url.findOne({ 'slug': request.params.slug }, function( err, url ) {
     url.slug = url.slug;
     url.originalUrl = request.body.originalUrl;
     url.active = request.body.active || true,
@@ -98,7 +98,7 @@ exports.update = function( request, response ) {
 // DELETE
 
 exports.delete = function( request, response ) {
-  return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
+  return Url.findOne({ 'slug': request.params.slug }, function( err, url ) {
 
     return url.remove( function( err, url ) {
       if( err ) response.json( err );

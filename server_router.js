@@ -37,9 +37,9 @@ module.exports = function(app) {
   app.get( '/api',                    urlContoller.root);
   app.get( '/api/urls',               urlContoller.index);
   app.post( '/api/urls',              urlContoller.create);
-  app.get( '/api/urls/:shortened',    urlContoller.show);
-  app.put( '/api/urls/:shortened',    urlContoller.update);
-  app.delete( '/api/urls/:shortened', urlContoller.delete);
+  app.get( '/api/urls/:slug',         urlContoller.show);
+  app.put( '/api/urls/:slug',         urlContoller.update);
+  app.delete( '/api/urls/:slug',      urlContoller.delete);
   app.get( '/:slug',                  urlContoller.redirect);
 
 };
