@@ -18,6 +18,7 @@
     "grunt-contrib-concat": "*",
     "grunt-contrib-uglify": "*",
     "passport": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "mongodb": "*"
   }
 }
