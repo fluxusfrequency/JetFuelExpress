@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="stylesheets/sub-theme-tan.css">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/jetfuelexpress.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if IE]>
@@ -38,14 +39,14 @@
 
     <script type="text/text-template" id="header-template">
         <nav>
-          <div class="container">
-            <a href="#" class="brand">{{ title }}</a>
-          </div>
-          <div>
+          <div id="nav-links">
             <%= jetfuelexpress.current_user ? 
             "Hello, " + jetfuelexpress.current_user.username + "<a href='#' id='feed-link'> My Links </button><a href='/logout' id='logout-link'> Log Out</a>" : 
             "Hello, Guest! <a href='/signup' id='signup-link'>Sign Up</a> <a href='/login' id='login-link'>Log In</a>"
              %>
+          </div>
+          <div class="container">
+            <a href="#" class="brand">{{ title }}</a>
           </div>
         </nav>
 
