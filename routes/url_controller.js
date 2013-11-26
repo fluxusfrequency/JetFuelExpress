@@ -64,12 +64,16 @@ exports.show = function( request, response ) {
 
 exports.redirect = function( request, response ) {
   return Url.findOne({ 'slug': request.params.shortened }, function( err, url ) {
-    url.visits += 1;
-    url.save(function( err, url ) {
-      if( err ) response.json( err );
-    });
+    if ( !url ) {
+      response.redirect( '/' );
+    } else {
+      url.visits += 1;
+      url.save(function( err, url ) {
+        if( err ) response.json( err );
+      });
 
-    return response.redirect("http://" + url.originalUrl);
+      return response.redirect("http://" + url.originalUrl);
+    }
   });
 };
 

@@ -6,7 +6,6 @@ jetfuelexpress.Router = Backbone.Router.extend({
     "": "home",
     "shorten": "urls",
     "login": "login",
-    "logout": "logout",
     "signup": "signup"
   },
 

@@ -23,7 +23,7 @@ module.exports = function(app) {
   // Auth Routes
 
   app.post('/api/login', authController.login);
-  app.get('/api/logout', authController.logout);
+  app.get('/logout', authController.logout);
 
   // User Routes
 
@@ -39,6 +39,6 @@ module.exports = function(app) {
   app.get( '/api/urls/:shortened',    urlContoller.show);
   app.put( '/api/urls/:shortened',    urlContoller.update);
   app.delete( '/api/urls/:shortened', urlContoller.delete);
-  app.get( '/:shortened',             urlContoller.redirect);
+  app.get( '/:slug',                  urlContoller.redirect);
 
 };

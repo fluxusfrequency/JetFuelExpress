@@ -7,7 +7,6 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     'click .brand': "showHome",
     'click #submit-button': 'addUrl',
     'click #login-link': 'login',
-    'click #logout-link': 'logout',
     'click #signup-link': 'signup',
   },
 
@@ -47,22 +46,23 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
 
   login: function(e) {
     e.preventDefault();
-    Backbone.history.navigate('login', {trigger:true});
+    Backbone.history.navigate('login', {trigger:false});
+    jetfuelexpress.appView.render();
   },
 
-  logout: function(e) {
-    e.preventDefault();
+  // logout: function(e) {
+  //   e.preventDefault();
 
-    $.ajax({
-      url: '/api/logout',
-      type: 'get',
-      dataType: 'json',
-      success: function(data) {
-        Backbone.history.navigate('/', {trigger:true});
-      },
-      error: function(response) {}
-    });
-  },
+  //   $.ajax({
+  //     url: '/logout',
+  //     type: 'get',
+  //     dataType: 'json',
+  //     success: function(data) {
+  //       Backbone.history.navigate('/', {trigger:true});
+  //     },
+  //     error: function(response) {}
+  //   });
+  // },
 
   signup: function(e) {
     e.preventDefault();
