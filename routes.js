@@ -2,9 +2,9 @@ var passport = require('passport');
 var path = require('path');
 var application_root = __dirname;
 
-var urlContoller = require('./routes/url_controller');
 var userController = require('./routes/user_controller');
 var indexController = require('./routes/index_controller');
+var urlContoller = require('./routes/url_controller');
 var authController = require('./routes/auth_controller');
 
 var Url = require('./lib/url');
@@ -18,9 +18,7 @@ module.exports = function(app) {
 
   // Alias Routes
 
-  app.get('/shorten', function( request, response ) {
-    return response.sendfile( path.join( application_root, 'public/index.html') ) ;
-  });
+  app.get('/shorten', indexController.index);
 
   // Auth Routes
 
@@ -29,7 +27,7 @@ module.exports = function(app) {
 
   // User Routes
 
-  app.post( '/api/users/',            userController.create);
+  app.post( '/api/users',             userController.create);
   app.get( '/api/users/current_user', userController.current_user);
   app.get( '/api/users/:username',    userController.show);
 

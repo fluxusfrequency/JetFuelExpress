@@ -12,7 +12,7 @@ exports.create = function( request, response ) {
 
   user.save( function( err, user ) {
     if( err ) response.json( err );
-    response.redirect( '/' );
+    response.send( user );
   });
 };
 

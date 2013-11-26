@@ -8,7 +8,7 @@ describe("api route", function() {
   });
 
   it("should respond with json to user CREATE json request", function(done) {
-    request.post("http://localhost:3000/api/users/", 
+    request.post("http://localhost:3000/api/users",
       {form:{"username": "johndoe", "email": "johndoe@example.com",
         "password": "password"}},
       function(error, response, body) {

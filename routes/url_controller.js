@@ -11,13 +11,23 @@ exports.root = function(request, response) {
 // INDEX
 
 exports.index = function( request, response ) {
-  return Url.find({ userId: request.user._id }, function( err, urls ) {
-    if ( err ) {
-      response.json( err );
-    } else {
-      response.send( urls );
-    }
-  });
+  if (request.user) {
+    return Url.find({ userId: request.user._id }, function( err, urls ) {
+      if ( err ) {
+        response.json( err );
+      } else {
+        response.send( urls );
+      }
+    });
+  } else {
+    return Url.find( function( err, urls) {
+      if ( err ) {
+        response.json( err );
+      } else {
+        response.send( urls );
+      }
+    });
+  }
 };
 
 // CREATE
