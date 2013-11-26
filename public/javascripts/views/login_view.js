@@ -1,8 +1,8 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 
-jetfuelexpress.WelcomeView = Backbone.View.extend({
-  template: Handlebars.compile($('#welcome-template').html()),
+jetfuelexpress.LoginView = Backbone.View.extend({
+  template: Handlebars.compile($('#login-template').html()),
 
   render: function () {
     this.$el.html(this.template());

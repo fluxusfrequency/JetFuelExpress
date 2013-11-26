@@ -33,10 +33,12 @@ jetfuelexpress.AppView = Backbone.View.extend({
     this.swapMain(view);
   },
 
-  showWelcome: function() {
-    this.urlsView = null;
-    var view = new jetfuelexpress.WelcomeView();
-    $('#header-message').html(view.render().el);
+  showLogin: function() {
+    $('#home-template').html('');
+  },
+
+  showSignup: function() {
+    $('#home-template').html('');
   },
 
   showUrls: function() {
@@ -44,6 +46,12 @@ jetfuelexpress.AppView = Backbone.View.extend({
     $('#header-message').html('<h2>Paste Another Link to Shorten</h2>');
     var view = this.urls();
     this.swapMain(view);
+  },
+
+  showWelcome: function() {
+    this.urlsView = null;
+    var view = new jetfuelexpress.WelcomeView();
+    $('#header-message').html(view.render().el);
   },
 
   swapMain: function(view) {

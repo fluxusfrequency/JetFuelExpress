@@ -173,7 +173,7 @@
       </form>
     </script>
 
-    <script type="text/x-handlebars-template" id="login-template">
+    <script type="text/x-handlebars-template" id="signup-template">
       <form action="/api/users/" method="post">
         <div>
             <label>Username:</label>

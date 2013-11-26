@@ -47,14 +47,26 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
 
   login: function(e) {
     e.preventDefault();
+    Backbone.history.navigate('login', {trigger:true});
   },
 
   logout: function(e) {
     e.preventDefault();
+
+    $.ajax({
+      url: '/api/logout',
+      type: 'get',
+      dataType: 'json',
+      success: function(data) {
+        Backbone.history.navigate('/', {trigger:true});
+      },
+      error: function(response) {}
+    });
   },
 
   signup: function(e) {
     e.preventDefault();
+    Backbone.history.navigate('signup', {trigger:true});
   }
 
 });

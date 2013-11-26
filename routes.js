@@ -24,8 +24,8 @@ module.exports = function(app) {
 
   // Auth Routes
 
-  app.post('/login', authController.login);
-  app.get('/logout', authController.logout);
+  app.post('/api/login', authController.login);
+  app.get('/api/logout', authController.logout);
 
   // User Routes
 
