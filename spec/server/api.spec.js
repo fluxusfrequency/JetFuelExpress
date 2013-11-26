@@ -113,7 +113,7 @@ describe("api route", function() {
                         "userId": "0",
                         "createdDate": Date.now()});
     url.save();
-    request.put("http://localhost:3000/api/urls/" + url.slug, {form:{"newOriginal": "www.geocities.com"}},
+    request.put("http://localhost:3000/api/urls/" + url.slug, {form:{"slug": url.slug, "newOriginal": "www.geocities.com"}},
       function(error, response, body) {
         expect(response.statusCode).toBe(200);
         expect(response.body).toContain('{');
