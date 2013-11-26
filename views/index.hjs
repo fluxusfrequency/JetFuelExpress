@@ -232,15 +232,20 @@
       </article>
     </script>
 
-    <!-- DEPENDENCIES -->
+    <!-- Development -->
+
+    <script src="main.js"></script>
+
+    <!-- Production -->
+
+    <!-- DEPENDENCIES --><!--
     <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
     <script src="javascripts/lib/json3.min.js"></script>
-    <!--script src="javascripts/lib/handlebars.js"></script-->
     <script src="javascripts/lib/underscore-min.js"></script>
     <script src="javascripts/lib/backbone-min.js"></script>
-    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>-->
 
-    <!-- APP -->
+    <!-- APP --><!--
     <script src="javascripts/app.js"></script>
     <script src="javascripts/routers/router.js"></script>
     <script src="javascripts/models/url_model.js"></script>
@@ -254,7 +259,7 @@
     <script src="javascripts/views/urls_view.js"></script>
     <script src="javascripts/views/login_view.js"></script>
     <script src="javascripts/views/signup_view.js"></script>
-    <script src="javascripts/views/last_url_view.js"></script>
+    <script src="javascripts/views/last_url_view.js"></script>-->
 
   </body>
 
