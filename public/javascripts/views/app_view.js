@@ -48,6 +48,11 @@ jetfuelexpress.AppView = Backbone.View.extend({
     this.swapMain(view);
   },
 
+  showLastUrl: function(item) {
+    var view = new jetfuelexpress.LastUrlView();
+    this.$main.html(view.render(item).el);
+  },
+
   login: function() {
     this.loginView = this.loginView || new jetfuelexpress.LoginView();
     return this.loginView;

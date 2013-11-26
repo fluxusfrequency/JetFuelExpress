@@ -4,7 +4,8 @@ jetfuelexpress.Router = Backbone.Router.extend({
 
   routes: {
     "": "home",
-    "shorten": "urls",
+    "shorten": "lastUrl",
+    "feed": "urls",
     "login": "login",
     "signup": "signup"
   },
@@ -14,8 +15,8 @@ jetfuelexpress.Router = Backbone.Router.extend({
     jetfuelexpress.appView.showWelcome();
   },
 
-  urls: function() {
-    jetfuelexpress.appView.showUrls();
+  lastUrl: function() {
+    jetfuelexpress.appView.showLastUrl();
   },
 
   login: function() {
@@ -24,6 +25,10 @@ jetfuelexpress.Router = Backbone.Router.extend({
 
   signup: function() {
     jetfuelexpress.appView.showSignup();
+  },
+
+  urls: function() {
+    jetfuelexpress.appView.showUrls();
   }
 
 });

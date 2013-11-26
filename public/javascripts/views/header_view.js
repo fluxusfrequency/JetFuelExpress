@@ -23,6 +23,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
     e.preventDefault();
     var formData = {};
 
+
     var new_link = this.$('#originalUrl').val();
     $.ajax({
       url: '/api/urls',
@@ -30,8 +31,13 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
       dataType: 'json',
       data: { "originalUrl": new_link },
       success: function(data) {
-        Backbone.history.navigate('shorten', {trigger: (Backbone.history.loc === 'shorten' ? false : true)});
-        jetfuelexpress.urlCollection.add(data);
+        if(jetfuelexpress.current_user) {
+          Backbone.history.navigate('feed', {trigger: (Backbone.history.loc === 'feed' ? false : true)});
+          jetfuelexpress.urlCollection.add(data);
+        } else {
+          Backbone.history.navigate('shorten', {trigger: false});
+          jetfuelexpress.appView.showLastUrl(data);
+        }
       },
       error: function(response) {
 

@@ -23,15 +23,13 @@
 
     <div class="container">
 
-      <header id="header"><h1 id="title">JetFuel Express HJS</h1></header>
+      <header id="header"></header>
 
       <section id="main"></section>
 
-      <section id="urls">
-        <article>
-          
-        </article>
-      </section>
+      <section id="urls"></section>
+
+      <section id="modal"></section>
 
       <section id="footer"></section>
 
@@ -87,7 +85,6 @@
             </li>
           </ul>
         </div>
-        <!-- Edit your copyright here -->
         <p>Built by Ben Lewis, with apologies to Bit.ly. For demo purposes only.</p>        
       </footer>
     </script>
@@ -152,49 +149,64 @@
     </script>
 
     <script type="text/template" id="url-template">
-      <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
-      <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
-      <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
-      <button class="btn btn-small btn-warning delete">Delete</button>
-      <hr />
+      <article>
+        <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
+        <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
+        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
+        <button class="btn btn-small btn-warning delete">Delete</button>
+        <hr />
+      </article>
+    </script>
+
+    <script type="text/text-template" id="last-url-template">
+      <article>
+        <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
+        <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
+        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %>  |  </p>
+        <button class="btn btn-small btn-warning delete">Delete</button>
+      </article>
     </script>
 
     <script type="text/text-template" id="login-template">
-      <h2>Log In To JetFuelExpress</h2>
-      <form action="/login" method="post">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username"/>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-small btn-warning" value="Log In"/>
-        </div>
-      </form>
+      <article>
+        <h2>Log In To JetFuelExpress</h2>
+        <form action="/login" method="post">
+          <div>
+              <label>Username:</label>
+              <input type="text" name="username"/>
+          </div>
+          <div>
+              <label>Password:</label>
+              <input type="password" name="password"/>
+          </div>
+          <div>
+              <input type="submit" class="btn btn-small btn-warning" value="Log In"/>
+          </div>
+        </form>
+      </article>
     </script>
 
     <script type="text/text-template" id="signup-template">
-      <h2>Sign Up For JetFuelExpress</h2>
-      <form action="/api/users/" method="post">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username"/>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-        </div>
-        <div>
-            <label>Email:</label>
-            <input type="text" name="email"/>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-small btn-warning" value="Create User"/>
-        </div>
-      </form>
+      <article>
+        <h2>Sign Up For JetFuelExpress</h2>
+        <form action="/api/users/" method="post">
+          <div>
+              <label>Username:</label>
+              <input type="text" name="username"/>
+          </div>
+          <div>
+              <label>Password:</label>
+              <input type="password" name="password"/>
+          </div>
+          <div>
+              <label>Email:</label>
+              <input type="text" name="email"/>
+          </div>
+          <div>
+              <input type="submit" class="btn btn-small btn-warning" value="Create User"/>
+          </div>
+        </form>
+      </article>
     </script>
 
     <!-- DEPENDENCIES -->
@@ -203,7 +215,6 @@
     <!--script src="javascripts/lib/handlebars.js"></script-->
     <script src="javascripts/lib/underscore-min.js"></script>
     <script src="javascripts/lib/backbone-min.js"></script>
-    <script src="javascripts/lib/jquery.dateFormat-1.0.js"></script>
     <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
 
     <!-- APP -->
@@ -220,6 +231,7 @@
     <script src="javascripts/views/urls_view.js"></script>
     <script src="javascripts/views/login_view.js"></script>
     <script src="javascripts/views/signup_view.js"></script>
+    <script src="javascripts/views/last_url_view.js"></script>
 
   </body>
 
