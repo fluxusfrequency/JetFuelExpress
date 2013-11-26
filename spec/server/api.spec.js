@@ -66,7 +66,7 @@ describe("api route", function() {
     });
   });
 
-  it("should respond with json to url GET json request", function(done) {
+  it("should respond with json to url SHOW json request", function(done) {
     var url = new Url({ "originalUrl":"www.google.com", 
                         "slug": generator.generate_slug(),
                         "active":true,
@@ -97,11 +97,11 @@ describe("api route", function() {
                         "userId": "0",
                         "createdDate": Date.now()});
     url.save();
-    request.get( "http://localhost:3000/"  + url.slug, function(error, response, body) {
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toContain("Lycos is your source for all the Web has to offer");
-        expect(error).toBeNull;
-        done();
+    request.get( "http://localhost:3000/" + url.slug, function(error, response, body) {
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toContain("Lycos is your source for all the Web has to offer");
+      expect(error).toBeNull;
+      done();
     });
   });
 
