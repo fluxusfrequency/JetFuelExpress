@@ -28,9 +28,9 @@
 
       <section id="main"></section>
 
-      <section id="urls"></section>
-
-      <section id="modal"></section>
+      <section id="urls">
+        {{}}
+      </section>
 
       <section id="footer"></section>
 
