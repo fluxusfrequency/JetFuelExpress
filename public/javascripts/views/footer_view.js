@@ -1,10 +1,10 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.FooterView = Backbone.View.extend({
-  template: _.template($('#footer-template').html()),
+  templateName: 'footer-template',
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(_.template(jetfuelexpress.TEMPLATES[this.templateName])());
     return this;
   }
 });

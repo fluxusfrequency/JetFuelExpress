@@ -37,215 +37,38 @@
 
     </div>
 
-    <script type="text/text-template" id="header-template">
-        <nav>
-          <div id="nav-links">
-            <%= jetfuelexpress.current_user ? 
-            "Hello, " + jetfuelexpress.current_user.username + " <a href='#' id='feed-link'>My Links</a> <a href='/logout' id='logout-link'> Log Out</a>" : 
-            "Hello, Guest! <a href='/signup' id='signup-link'>Sign Up</a> <a href='/login' id='login-link'>Log In</a>"
-             %>
-          </div>
-          <div class="container">
-            <a href="#" class="brand">{{ title }}</a>
-          </div>
-        </nav>
+    <script type="text/text-template" id="header-template" src="javascripts/templates/header.js"></script>
 
-        <section class="container" id="header-section">
+    <script type="text/text-template" id="footer-template" src="javascripts/templates/footer.js"></script>
 
-          <div id="header-message">
-          </div>
+    <script type="text/text-template" id="welcome-template" src="javascripts/templates/welcome.js"></script>
 
+    <script type="text/text-template" id="home-template" src="javascripts/templates/home.js"></script>
 
-          <form id="addUrl" action="#">
-            <input id="originalUrl" type="text" placeholder="Paste your link" required />
-            <button class="btn btn-gold" id="submit-button">Shorten</button>
-          </form>
-          
-        </section>
+    <script type="text/template" id="url-template" src="javascripts/template/url.js"></script>
 
-    </script>
+    <script type="text/template" id="url-edit-template" src="javascripts/template/url_edit.js"></script>
 
-    <script type="text/text-template" id="footer-template">
-      <footer>
-        <div class="container">
-          <ul class="row-fluid">
-            <!-- Edit your footer content here -->
-            <li>
-              <a href="">About Us</a>
-            </li>
-            <li>
-              <a href="">Terms of Use</a>
-            </li>
-            <li>
-              <a href="">Privacy</a>
-            </li>
-            <li>
-              <a href="">Social</a>
-            </li>
-            <li>
-              <a href="">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <p>Built by Ben Lewis, with apologies to Bit.ly. For demo purposes only.</p>        
-      </footer>
-    </script>
+    <script type="text/text-template" id="last-url-template" src="javascripts/templates/last_url.js"></script>
 
-    <script type="text/text-template" id="welcome-template">      
-      <h1>Making it easy to share the web</h1>
-      <h2>JetFuel Express is the fast and easy way to 
-      manage your links.</h2>
-    </script>
+    <script type="text/text-template" id="login-template" src="javascripts/templates/login.js"></script>
 
-    <script type="text/text-template" id="home-template">
-      <article>
-        <div class="container">
-          <ul class="row-fluid">
-            <li class="span3"> 
-              <i class="foundicon-checkmark"></i>
-              <div class="box">
-                <!-- Edit your article content here -->
-                <h3>Fast</h3>
-                <p>
-                  Built on the ultra-fast Node.js framework Express.js, so you
-                  can get your links ready with less waiting.
-                </p>
-              </div>
-            </li>
-            <li class="span3"> 
-              <i class="foundicon-edit"></i>
-              <div class="box">
-                <!-- Edit your article content here -->
-                <h3>Convenient</h3>
-                <p>
-                  JetFuelExpress remembers your shortened links, so you can use
-                  them again with no effort.
-                </p>
-              </div>
-            </li>
-            <li class="span3">
-              <i class="foundicon-tools"></i>
-              <div class="box">
-                <!-- Edit your article content here -->
-                <h3>Social</h3>
-                <p>
-                  Show your friends what youre reading. Share links via Twitter.
-                </p>
-              </div>
-            </li>
-            <li class="span3">
-              <i class="foundicon-add-doc"></i>
-              <div class="box">
-                <!-- Edit your article content here -->
-                <h3>Responsive</h3>
-                <p>
-                  JetFuel Express looks great on a wide variety of devices. Check
-                  it out on your tablet, phone, or other device!
-                </p>
-
-              </div>
-            </li>
-          </ul>
-        </div>
-      </article>
-    </script>
-
-    <script type="text/template" id="url-template">
-      <article>
-        <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
-        <h5><a href="/<%= slug %>"><%= "ShortLink: http://jfx.herokuapp.com/" + slug %></a></h5>
-        <p class="view-stats">Views: <%= visits %>  |  
-        Date Created: <%= createdDate %>  |  
-        <%= active ? "Active" : "Deactivated" %>  
-        </p>
-        <button class="btn btn-small btn-warning edit">Edit</button>
-        <button class="btn btn-small btn-warning delete">Delete</button>
-      </article>
-    </script>
-
-    <script type="text/template" id="url-edit-template">
-      <article id="editArticle">
-        <fieldset>
-          <form class="editUrl" action="#">
-            <label for="newOriginal">Original Url: </label>
-            <input id="newOriginal" type="text" value=<%= "originalUrl" %> />
-            <label for="newSlug">Shortlink</label>
-            <input id="newSlug" type="text" value=<%= "slug" %> />
-            <label for="active">Active?</label>
-            <input id="active" type="text" value="true"/>
-            <br/>
-            <br/>
-            <button class="btn btn-small btn-warning save">Save</button>
-            <button class="btn btn-small btn-warning cancel">Cancel</button>
-          </form>
-        </fieldset>
-      </article>
-    </script>
-
-    <script type="text/text-template" id="last-url-template">
-      <article>
-        <h4><a href="http://<%= originalUrl %>/"><%= originalUrl %></a></h4>
-        <h5><a href="/<%= slug %>">ShortLink: localhost:3000/<%= slug %></a></h5>
-        <p class="view-stats">Views: <%= visits %>  |  Date Created: <%= createdDate %></p>
-      </article>
-    </script>
-
-    <script type="text/text-template" id="login-template">
-      <article id="login-article">
-        <h2>Log In To JetFuelExpress</h2>
-        <form action="/login" method="post">
-          <div>
-              <label>Username:</label>
-              <input type="text" name="username" autofocus />
-          </div>
-          <div>
-              <label>Password:</label>
-              <input type="password" name="password"/>
-          </div>
-          <div>
-              <input type="submit" class="btn btn-small btn-warning" value="Log In"/>
-          </div>
-        </form>
-      </article>
-    </script>
-
-    <script type="text/text-template" id="signup-template">
-      <article id="signup-article">
-        <h2>Sign Up For JetFuelExpress</h2>
-        <form action="/api/users/" method="post">
-          <div>
-              <label>Username:</label>
-              <input type="text" name="username"/>
-          </div>
-          <div>
-              <label>Password:</label>
-              <input type="password" name="password"/>
-          </div>
-          <div>
-              <label>Email:</label>
-              <input type="text" name="email"/>
-          </div>
-          <div>
-              <input type="submit" class="btn btn-small btn-warning" value="Create User"/>
-          </div>
-        </form>
-      </article>
-    </script>
+    <script type="text/text-template" id="signup-template" src="javascripts/templates/signup.js"></script>
 
     <!-- Development -->
 
-    <script src="javascripts/main.js"></script>
+    <!--<script src="javascripts/main.js"></script>-->
 
     <!-- Production -->
 
-    <!-- DEPENDENCIES --><!--
+    <!-- DEPENDENCIES -->
     <script src="javascripts/lib/jquery-1.10.1.min.js"></script>
     <script src="javascripts/lib/json3.min.js"></script>
     <script src="javascripts/lib/underscore-min.js"></script>
     <script src="javascripts/lib/backbone-min.js"></script>
-    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>-->
+    <script src="javascripts/lib/jquery-ui-1.10.3.custom.min.js"></script>
 
-    <!-- APP --><!--
+    <!-- APP -->
     <script src="javascripts/app.js"></script>
     <script src="javascripts/routers/router.js"></script>
     <script src="javascripts/models/url_model.js"></script>
@@ -259,9 +82,10 @@
     <script src="javascripts/views/urls_view.js"></script>
     <script src="javascripts/views/login_view.js"></script>
     <script src="javascripts/views/signup_view.js"></script>
-    <script src="javascripts/views/last_url_view.js"></script>-->
+    <script src="javascripts/views/last_url_view.js"></script>
+
 
   </body>
 
-  
+
 </html>

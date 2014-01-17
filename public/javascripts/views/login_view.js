@@ -1,10 +1,10 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.LoginView = Backbone.View.extend({
-  template: _.template($('#login-template').html()),
+  templateName: 'login-template',
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(_.template(jetfuelexpress.TEMPLATES[this.templateName])());
     return this;
   }
 

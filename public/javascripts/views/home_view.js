@@ -1,10 +1,10 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.HomeView = Backbone.View.extend({
-  template: _.template($('#home-template').html()),
+  templateName: 'home-template',
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(_.template(jetfuelexpress.TEMPLATES[this.templateName])());
     return this;
   },
 

@@ -1,10 +1,10 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.ShortenView = Backbone.View.extend({
-  template: _.template($('#shorten-template').html()),
+  templateName: 'shorten-template',
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(_.template(jetfuelexpress.TEMPLATES[this.templateName])());
     return this;
   },
 

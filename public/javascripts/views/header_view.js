@@ -1,7 +1,7 @@
 var jetfuelexpress = jetfuelexpress || {};
 
 jetfuelexpress.HeaderView = Backbone.View.extend({
-  template: _.template($('#header-template').html()),
+  templateName: 'header-template',
 
   events: {
     'click .brand': "showHome",
@@ -12,7 +12,7 @@ jetfuelexpress.HeaderView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(_.template(jetfuelexpress.TEMPLATES[this.templateName])({title: 'JetFuel Express'}));
     return this;
   },
 
