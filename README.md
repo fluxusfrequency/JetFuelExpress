@@ -3,7 +3,7 @@ JetFuelExpress
 
 Bit.ly clone built with Backbone, Express.js, and MongoDB.
 
-This is my first attempt at writing an app in written from top to bottom in JavaScript.
+This is my first attempt at writing a single page app.
 
 It's based on the Jumpstart Lab [JetFuel Project](http://tutorials.jumpstartlab.com/projects/jet_fuel.html),
 originally specified to be built in Ruby with Sinatra.
